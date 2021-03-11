@@ -1,6 +1,7 @@
 from app import app, db
 from data.user_data import list_users
 from data.messages_data import list_messages
+from data.conversations_data import list_conversation
 
 
 
@@ -15,7 +16,9 @@ with app.app_context():
 
         db.session.add_all(list_users)
         db.session.commit()
-        
+
+        db.session.add_all(list_conversation)
+        db.session.commit()        
 
         db.session.add_all(list_messages)
         db.session.commit()

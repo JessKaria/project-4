@@ -1,20 +1,21 @@
 
 from app import db
 from models.base import BaseModel
-# from models.message import Message
-
 
 
 
 class Conversation(db.Model, BaseModel):
     __tablename__ = 'conversations'
 
-    personone = db.Column(db.Integer)
-    persontwo = db.Column(db.Integer)
+    
+    #? conversation relationship with message
+    #! 1
+    c_messages = db.relationship('Message', backref='c_user', cascade='all, delete')
 
-    messages = db.relationship('Message', backref='conversation', cascade='all, delete')
-    # user_one_id = db.Column(db.Integer, db.ForeignKey('user_message_id', ondelete="CASCADE"))
-    user_message_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
 
+    #?this needs two FK userids? 
+    #!3
+    userone_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
+    usertwo_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
 
 
