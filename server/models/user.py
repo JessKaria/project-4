@@ -12,3 +12,6 @@ class User(db.Model, BaseModel):
     photo = db.Column(db.Text)
 
     messages = db.relationship('Message', backref='user', cascade='all, delete')
+
+
+    
