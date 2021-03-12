@@ -14,6 +14,9 @@ class Event(db.Model,BaseModel):
     expected_attendees = db.Column(db.Text, nullable=True)
     image = db.Column(db.Text, nullable=True)
 
+    comments = db.relationship('Comment', backref='event', cascade="all, delete")
+
+
 
 
 

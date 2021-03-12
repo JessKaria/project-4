@@ -1,7 +1,6 @@
 from models.comments import Comment
 
 list_comments = [
-    Comment(comment="amazing this great",
-    Comment(comment="yup amazing")
-
+    Comment(comment="amazing this great", event_id=1),
+    Comment(comment="yup amazing", event_id=2)
 ]

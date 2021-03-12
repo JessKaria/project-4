@@ -1,12 +1,18 @@
 from flask import Blueprint, request
 
 from models.events import Event
+from models.comments import Comment
 from marshmallow.exceptions import ValidationError
+
+
 from serializers.events import EventSchema
+from serializers.comments import CommentSchema
+
+
 from sqlalchemy.exc import IntegrityError
 
 event_schema = EventSchema()
-
+comment_schema = CommentSchema()
 
 
 router = Blueprint(__name__, 'event')
@@ -63,6 +69,32 @@ def delete_event(event_id):
     event = Event.query.get(event_id)
     event.remove()
     return { 'message': 'Event has been deleted!!' }, 200
+
+
+#!---------COMMENTS------------!#
+
+@router.route('/event/<event_id>/comments', methods=['POST'])
+def create_comment(event_id):
+    comment_dict = request.json
+    event_d = Event.query.get(event_id)
+
+    try:
+        comment = comment_schema.load(comment_dict)
+        comment.event = event_d
+    except ValidationError as e:
+        return { 'errors': e.messages, 'messages': 'UhOh! Unexpected Error!'  }
+    comment.save()
+    return comment_schema.jsonify(comment)
+
+
+@router.route('/event/<event_id>/comments/<comment_id>', methods=['DELETE'])
+def delete_comment(event_id, comment_id):
+    comment = Comment.query.get(comment_id)
+    comment.remove()
+    event = Event.query.get(event_id)
+    event.save()
+    return comment_schema.jsonify(event),
+
 
 
 

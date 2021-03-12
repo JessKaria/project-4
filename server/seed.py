@@ -1,8 +1,9 @@
 from app import app, db
 from data.user_data import list_users
-from data.messages_data import list_messages
 from data.conversations_data import list_conversation
+from data.messages_data import list_messages
 from data.events_data import list_events
+from data.comments_data import list_comments
 
 
 
@@ -28,6 +29,8 @@ with app.app_context():
         db.session.add_all(list_events)
         db.session.commit()
 
+        db.session.add_all(list_comments)
+        db.session.commit()
 
 
 
