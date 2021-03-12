@@ -16,12 +16,11 @@ conversation_schema = ConversationSchema()
 router = Blueprint(__name__, 'messages')
 
 
-
 #!! Check if the users are in the conversation table.
 ##! If they are it will return the conversation
 #! If they arent it will return a prompt to create a converstaion
 #! We need to render this on the front end
-#! this only works on once side how can you test for the second argument
+#! this only works on once side how can you test for the column
 @router.route('/check-history/<user_one_id>/convo/<user_two_id>', methods=['GET'])
 def messages_test(user_one_id, user_two_id):
     #? check if the conversation exists
@@ -35,13 +34,23 @@ def messages_test(user_one_id, user_two_id):
 
 
 #! get all the message that have been to sent to you?
-@router.route('/check-history/<user_one_id>', methods=['GET'])
-def inbox(user_one_id):
+@router.route('/check-convos/<user_one_id>', methods=['GET'])
+def get_convos(user_one_id):
     #? check if the conversation exists
     conversation = Conversation.query.filter_by(userone_id=user_one_id).all()
     if not conversation:
         return 'You need to create a new conversation '
     return conversation_schema.jsonify(conversation, many=True), 200
+
+
+#! get your sent box - work out inbox!
+@router.route('/check-messages/<user_id>', methods=['GET'])
+def get_messages(user_id):
+    #? check if the conversation exists
+    messages = Message.query.filter_by(user_id=user_id).all()
+    if not messages:
+        return 'UhOh! Something has gone wrong! '
+    return message_schema.jsonify(messages, many=True), 200
 
 
 
@@ -62,13 +71,12 @@ def create_conversation(user_one_id, user_two_id):
         return 'conversation already exists!', 200
 
 
-#! This is basically conditional and should only initiate if they have
-#! No conversation history
-@router.route('/message/<user_id>/convo/<conversation_id>', methods=['POST'])
+#! This should send a message and populate the table
+@router.route('/send-message/<user_id>/convo/<conversation_id>', methods=['POST'])
 def send_message(user_id, conversation_id):
     incom_message = request.json
     message = message_schema.load(incom_message)
     message.user_id = user_id
     message.conversation_id = conversation_id
     message.save()
-    return 'working', 200
+    return message_schema.jsonify(message), 200
