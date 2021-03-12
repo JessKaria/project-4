@@ -15,82 +15,60 @@ conversation_schema = ConversationSchema()
 
 router = Blueprint(__name__, 'messages')
 
-@router.route('/message/<user_one_id>/convo/<user_two_id>', methods=['post'])
-def get_test():
-
-    return 'route working', 200
 
 
-@router.route('/message/<user_one_id>/convo/<user_two_id>', methods=['GET'])
+#!! Check if the users are in the conversation table.
+##! If they are it will return the conversation
+#! If they arent it will return a prompt to create a converstaion
+#! We need to render this on the front end
+#! this only works on once side how can you test for the second argument
+@router.route('/check-history/<user_one_id>/convo/<user_two_id>', methods=['GET'])
 def messages_test(user_one_id, user_two_id):
-
     #? check if the conversation exists
     conversation = Conversation.query.filter_by(userone_id=user_one_id, usertwo_id=user_two_id).first()
     # conversationtw = Conversation.query.filter_by(userone_id=user_two_id, usertwo_id=user_one_id).first()
     #? if it doesnt create the conversation
-        #? get the users by id and add them to conversations table
+        #? get the users by id and POST them to conversations table can I DO THIS IN A GET?
     if not conversation:
         return 'You need to create a new conversation '
     return conversation_schema.jsonify(conversation), 200
 
 
+#! get all the message that have been to sent to you?
+@router.route('/check-history/<user_one_id>', methods=['GET'])
+def inbox(user_one_id):
+    #? check if the conversation exists
+    conversation = Conversation.query.filter_by(userone_id=user_one_id).all()
+    if not conversation:
+        return 'You need to create a new conversation '
+    return conversation_schema.jsonify(conversation, many=True), 200
 
 
 
+#! This is basically conditional and should only initiate if they have
+#! No conversation history
+@router.route('/message/<user_one_id>/convo/<user_two_id>', methods=['POST'])
+def create_conversation(user_one_id, user_two_id):
+    conversation = Conversation.query.filter_by(userone_id=user_one_id, usertwo_id=user_two_id).first()
+    if not conversation:
+        convo = request.json
+        load_convo = conversation_schema.load(convo)
+        load_convo.userone_id = user_one_id
+        load_convo.usertwo_id = user_two_id
+        print(load_convo)
+        load_convo.save()
+        return conversation_schema.jsonify(load_convo), 200
+    else:
+        return 'conversation already exists!', 200
 
 
-@router.route('/messages/<user_id>/convo/<conversation_id>', methods=['POST'])
+#! This is basically conditional and should only initiate if they have
+#! No conversation history
+@router.route('/message/<user_id>/convo/<conversation_id>', methods=['POST'])
 def send_message(user_id, conversation_id):
-
-
-
-
-    #! SAVE REQUEST TO MESSAGES TABLE
-
-    #! SAVE USER ID AND CONVERSATION ID TO MESSAGES TABLE - THIS MAY BE REDUNDANT
-
-    #! SAVE USERID TO USERONE ON CONVERSATION TABLE
-
-    #! Ideas to solve:
-    #? should send as part of the request? (haven't tried)
-    #? can we create a function that creates a conversation we call it below (haven't tried)
-    #? can I create an empty row in coversation table (haven't tried)
-    #? update CASCADE? (haven't tried, not sure if it works)
-
-    #! the below will populate messages but not convo table
-    #! validation error when I un comment
-     #? save request as a dict
     incom_message = request.json
-    #? get the user who posted the message
-    #? serialize the message
-
-    # load_user = conversation_schema.load(user_id)
-
     message = message_schema.load(incom_message)
-    #?
-
-    # load_user.user_id = user_id
-
     message.user_id = user_id
+    message.conversation_id = conversation_id
     message.save()
-    return message_schema.jsonify(message), 200
-
-
-    #! this also doesnt work
-
-    # #? save request as a dict
-    # incom_message = request.json
-    # #? get the user who posted the message
-    # user = User.query.get(user_id)
-
-    # #?TRYING TO LOAD THE ID THEN SAVE HER?? WHY NO WORK?
-    # covo_user_id = conversation_schema.load(conversation_id)
-    # convo_id.save()
-
-    # #? serialize the message
-    # message = message_schema.load(incom_message)
-    # #?
-    # message.user = user
-    
-    # message.save()
-    # return message_schema.jsonify(message), 200
+    return 'working', 200

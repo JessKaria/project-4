@@ -10,6 +10,7 @@ class Conversation(db.Model, BaseModel):
     
     #? conversation relationship with message
     #! 1
+    convo = db.Column(db.Text)
     c_messages = db.relationship('Message', backref='c_user', cascade='all, delete')
 
 
