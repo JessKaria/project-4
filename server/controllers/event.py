@@ -1,28 +1,25 @@
-from flask import Blueprint, request
-
+from flask import Blueprint, request, g
 from models.events import Event
-from models.comments import Comment
+from models.category import Category
 from marshmallow.exceptions import ValidationError
-
-
+from decorators.secure_route import secure_route
 from serializers.events import EventSchema
-from serializers.comments import CommentSchema
-
-
+from serializers.category import CategorySchema
 from sqlalchemy.exc import IntegrityError
 
 event_schema = EventSchema()
-comment_schema = CommentSchema()
-
+category_schema = CategorySchema()
 
 router = Blueprint(__name__, 'event')
 
+#? get all the events
 
 @router.route('/event', methods=['GET'])
 def get_all_events():
     all_events = Event.query.all()
     return event_schema.jsonify(all_events, many=True)
 
+#? get single event
 
 @router.route('/event/<event_id>', methods=['GET'])
 def get_single_event(event_id):
@@ -32,26 +29,29 @@ def get_single_event(event_id):
     return event_schema.jsonify(single_event), 200
 
 
+#? create an event
+
 @router.route('/event', methods=['POST'])
+@secure_route
 def create_event():
     event_dict = request.json
     try:
         event = event_schema.load(event_dict)
+        event.users = g.current_user
     except ValidationError as e:
         return { 'errors': e.messages, 'messages': ' Aye papi! Somethang wrong!' }
-    try: 
-        event = event_schema.load(event_dict)
-    except IntegrityError:
-        return 'ID already taken !'
     event.save()
     return event_schema.jsonify(event), 200
 
+#? edit an event
 
 @router.route('/event/<event_id>', methods=['PUT'])
+@secure_route
 def edit_event(event_id):
     find_event = Event.query.get(event_id)
     event_dict = request.json
-
+    if find_event.users != g.current_user:
+        return {'errors': 'This is not your event to edit ☠️!'}, 402
     try:
         event = event_schema.load(
             event_dict,
@@ -63,41 +63,33 @@ def edit_event(event_id):
     event.save()
     return event_schema.jsonify(event)
 
+#? delete an event
 
 @router.route('/event/<event_id>', methods=['DELETE'])
 def delete_event(event_id):
     event = Event.query.get(event_id)
+    if event.user_id != g.current_user:
+        return {'errors': 'This is aint your event!'}, 402
     event.remove()
     return { 'message': 'Event has been deleted!!' }, 200
 
+#? get all categories
 
-#!---------COMMENTS------------!#
+#!-------GET CATEGORIES-----------#!
+@router.route('/category', methods=['GET'])
+def get_category():
+    category = Category.query.all()
+    return category_schema.jsonify(category, many=True), 200
 
-@router.route('/event/<event_id>/comments', methods=['POST'])
-def create_comment(event_id):
-    comment_dict = request.json
-    event_d = Event.query.get(event_id)
+#? add categories to the event!
 
-    try:
-        comment = comment_schema.load(comment_dict)
-        comment.event = event_d
-    except ValidationError as e:
-        return { 'errors': e.messages, 'messages': 'UhOh! Unexpected Error!'  }
-    comment.save()
-    return comment_schema.jsonify(comment)
-
-
-@router.route('/event/<event_id>/comments/<comment_id>', methods=['DELETE'])
-def delete_comment(event_id, comment_id):
-    comment = Comment.query.get(comment_id)
-    comment.remove()
+#! need so you can post this via a form
+@router.route('/event/<event_id>/category/<category_id>', methods=['POST'])
+def add_category(event_id, category_id):
     event = Event.query.get(event_id)
+    category = Category.query.get(category_id)
+    event.category.append(category)
     event.save()
-    return comment_schema.jsonify(event),
-
-
-
-
-
+    return event_schema.jsonify(event), 200
 
 

@@ -11,6 +11,7 @@ from flask_marshmallow import Marshmallow
 
 app = Flask(__name__) 
 
+from decorators import logging
 
 #? we crap our app in bcrypt
 
@@ -28,8 +29,9 @@ ma = Marshmallow(app)
 
 bcrypt = Bcrypt(app)
 
-from controllers import users, messages, event
+from controllers import users, messages, event, comments
 
 app.register_blueprint(users.router, url_prefix="/api")
 app.register_blueprint(messages.router, url_prefix="/api")
 app.register_blueprint(event.router, url_prefix="/api")
+app.register_blueprint(comments.router, url_prefix="/api")

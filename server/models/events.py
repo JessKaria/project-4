@@ -1,6 +1,11 @@
+
 from app import db
 from models.base import BaseModel
 from models.comments import Comment
+from models.event_category import events_categories_join
+from models.category import Category
+
+
 
 class Event(db.Model,BaseModel):
     __tablename__ = 'events'
@@ -13,8 +18,12 @@ class Event(db.Model,BaseModel):
     target_age = db.Column(db.Text, nullable=True)
     expected_attendees = db.Column(db.Text, nullable=True)
     image = db.Column(db.Text, nullable=True)
-
+    ticketed = db.Column(db.Boolean, nullable=True)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
     comments = db.relationship('Comment', backref='event', cascade="all, delete")
+    category = db.relationship('Category', backref='categories', secondary=events_categories_join)
+
 
 
 
