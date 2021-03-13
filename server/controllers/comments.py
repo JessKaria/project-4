@@ -16,6 +16,7 @@ router = Blueprint(__name__, 'comments')
 #!---------COMMENTS------------!#
 
 @router.route('/event/<event_id>/comments', methods=['POST'])
+@secure_route
 def create_comment(event_id):
     comment_dict = request.json
     event_d = Event.query.get(event_id)
@@ -24,6 +25,7 @@ def create_comment(event_id):
     try:
         comment = comment_schema.load(comment_dict)
         comment.event = event_d
+        comment.user_id = g.current_user.id
     except ValidationError as e:
         return { 'errors': e.messages, 'messages': 'UhOh! Unexpected Error!'  }
     comment.save()
@@ -31,11 +33,12 @@ def create_comment(event_id):
 
 
 @router.route('/event/<event_id>/comments/<comment_id>', methods=['DELETE'])
+@secure_route
 def delete_comment(event_id, comment_id):
     comment = Comment.query.get(comment_id)
-    print(comment)
+    if comment.event_id != g.current_user.id:
+        return { 'You cannot delete a comment you havent made?' }
     comment.remove()
     event = Event.query.get(event_id)
-    print(event)
     event.save()
     return comment_schema.jsonify(event), 202

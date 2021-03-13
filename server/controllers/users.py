@@ -3,6 +3,7 @@ from decorators.secure_route import secure_route
 from models.user import User
 from serializers.user import UserSchema
 from marshmallow.exceptions import ValidationError
+
 user_schema = UserSchema()
 
 router = Blueprint(__name__, 'users')

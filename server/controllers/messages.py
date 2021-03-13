@@ -17,74 +17,60 @@ conversation_schema = ConversationSchema()
 router = Blueprint(__name__, 'messages')
 
 #!! Check if the users are in the conversation table.
-##! If it already exists it will return the conversation
-#! If they arent it will return a prompt to create a converstaion
-#! We need to render this on the front end
-#! this only works on once side how can you test for the column
-#? this function still needs some refining - take a look revist tomorrow
+#! and if yes will recurn the convo
 
-@router.route('/check-history/<user_one_id>/convo/<user_two_id>', methods=['GET'])
+#! Needs to work for both sides - YOU ARE SO CLOSE - CMON SON!
+
+@router.route('/check-convo/<user2_id>', methods=['GET'])
 @secure_route
-def messages_test(user_one_id, user_two_id):
-    conversation = Conversation.query.filter_by(userone_id=user_one_id, usertwo_id=user_two_id)
-    if conversation:
-        return conversation_schema.jsonify(conversation, many=True), 200
-    conversation_two = Conversation.query.filter_by(userone_id=user_two_id, usertwo_id=user_one_id)
-    if conversation_two:
-        print(conversation_two)
-    return conversation_schema.jsonify(conversation_two, many=True), 200
+def check_conversation_exists(user2_id):
 
-
-#! this function needs to be fixed
-#? get all the message that you have sent.
-
-@router.route('/check-convos/<user_one_id>', methods=['GET'])
-@secure_route
-def get_convos(user_one_id):
-    #? check if the conversation exists
-    conversations = Conversation.query.filter_by(userone_id=user_one_id).all()
-    if not conversations:
-        return 'You need to create a new conversation '
-    return conversation_schema.jsonify(conversations, many=True), 200
-
-#! get your sent box - work out inbox!
-
-@router.route('/check-messages/<user_id>', methods=['GET'])
-def get_messages(user_id):
-    #? check if the conversation exists
     if not g.current_user:
-        return { 'You need to be signed in!' }
-    messages = Message.query.filter_by(user_id=user_id).all()
-    if not messages:
-        return 'UhOh! Something has gone wrong! '
-    return message_schema.jsonify(messages, many=True), 200
-
-
-#! This is basically conditional and should only initiate if they have
-#! No conversation history
-#! if the conversation exists already show something else
-#! if it hasnt then load the ID's
-@router.route('/message/<user_one_id>/convo/<user_two_id>', methods=['POST'])
-def create_conversation(user_one_id, user_two_id):
-    conversation = Conversation.query.filter_by(userone_id=user_one_id, usertwo_id=user_two_id).first()
+        return { 'Access denied!' }
+    current_user = g.current_user.id
+    conversation = Conversation.query.filter_by(userone_id=current_user, usertwo_id=user2_id)
     if not conversation:
+        return 'You need to create a conversation!'
+    return conversation_schema.jsonify(conversation, many=True)
+
+
+#! Conditionally render this on the front-end
+
+@router.route('/create-convo/<user_two_id>', methods=['POST'])
+@secure_route
+def create_conversation(user_two_id):
         convo = request.json
         load_convo = conversation_schema.load(convo)
-        load_convo.userone_id = user_one_id
+        load_convo.userone_id = g.current_user.id
         load_convo.usertwo_id = user_two_id
         print(load_convo)
         load_convo.save()
         return conversation_schema.jsonify(load_convo), 200
-    else:
-        return 'conversation already exists!', 200
 
 
-#! This should send a message and populate the table
-@router.route('/send-message/<user_id>/convo/<conversation_id>', methods=['POST'])
-def send_message(user_id, conversation_id):
+#? get your inbox aka all your conversations
+
+@router.route('/inbox', methods=['GET'])
+@secure_route
+def inbox():
+    conversations = Conversation.query.filter_by(userone_id=g.current_user.id).all()
+    if not conversations:
+        return 'You need to create a new conversation '
+    return conversation_schema.jsonify(conversations, many=True), 200
+
+
+#? Send messag
+@router.route('/send-message/<convo_id>', methods=['POST'])
+@secure_route
+def send_message(convo_id):
+    current_user_id = g.current_user.id
+    print(current_user_id)
     incom_message = request.json
+    print(incom_message)
     message = message_schema.load(incom_message)
-    message.user_id = user_id
-    message.conversation_id = conversation_id
+    print(message)
+    message.user_id = current_user_id
+    message.conversation_id = convo_id
     message.save()
-    return message_schema.jsonify(message), 200
+    print(message)
+    return 'success', 200
