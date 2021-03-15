@@ -65,6 +65,7 @@ const CreateEvent = ({ history }) => {
       const { data } = await axios.post('/api/event', formData, {
         headers: { Authorization: `Bearer ${token}` }
       })
+      history.push('/dashboard')
       
 
     } catch (err) {

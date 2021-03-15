@@ -37,6 +37,8 @@ def check_conversation_exists(user2_id):
         return conversation_schema.jsonify(conversation, many=True)
     elif conversation2:
         return conversation_schema.jsonify(conversation2, many=True)
+    else: 
+        return ''
 
 
 #! Conditionally render this on the front-end
