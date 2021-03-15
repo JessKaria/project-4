@@ -8,7 +8,7 @@ export function getLoggedInUserId() {
 }
 
 const logged = getLoggedInUserId()
-console.log(logged)
+
 
 
 export function isCreator(userIdToCompare) {

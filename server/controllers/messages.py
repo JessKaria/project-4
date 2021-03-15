@@ -29,13 +29,14 @@ def check_conversation_exists(user2_id):
     current_user = g.current_user.id
     conversation = Conversation.query.filter_by(userone_id=current_user, usertwo_id=user2_id).all()
     conversation2 = Conversation.query.filter_by(userone_id=user2_id, usertwo_id=current_user).all()
-    c = len(conversation)
-    c2 = len(conversation2)
-    print(c)
-    print(c2)
-    if (c == 0) and (c2 == 0):
-        return 'You need to start a new conversation'
-    return conversation_schema.jsonify(conversation, many=True)
+    print(type(conversation))
+    print(type(conversation2))
+    print(conversation)
+    print(conversation2)
+    if conversation:
+        return conversation_schema.jsonify(conversation, many=True)
+    elif conversation2:
+        return conversation_schema.jsonify(conversation2, many=True)
 
 
 #! Conditionally render this on the front-end
@@ -67,6 +68,13 @@ def inbox():
 def get_all_messages():
     all_messages = Message.query.filter_by(user_id=g.current_user.id)
     return message_schema.jsonify(all_messages, many=True)
+
+
+@router.route('/sent', methods=['GET'])
+@secure_route
+def get_sent_messages():
+    all_messages = Conversation.query.filter_by(usertwo_id=g.current_user.id)
+    return conversation_schema.jsonify(all_messages, many=True)
 
 
 #? Send messages

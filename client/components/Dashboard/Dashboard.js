@@ -14,17 +14,16 @@ const Dashboard = ({ history }) => {
   const user = getLoggedInUserId()
 
 
+
+
   useEffect(() => {
-    axios.get('/api/inbox', {
+    axios.get('/api/messages', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(({ data }) => {
         updateInbox(data)
-
       })
   }, [])
-
-
 
   useEffect(() => {
     axios.get('/api/event', {
@@ -35,8 +34,6 @@ const Dashboard = ({ history }) => {
         updateLoading(false)
       })
   }, [])
-
-
 
 
   useEffect(() => {
@@ -53,7 +50,6 @@ const Dashboard = ({ history }) => {
   if (loading) {
     return <h1 className="subtitle">Loading...</h1>
   }
-
 
 
 
@@ -81,128 +77,93 @@ const Dashboard = ({ history }) => {
                 <li><a>Customers</a></li>
                 <li><a>Other</a></li>
               </ul>
-              <p className="menu-label">
-                Administration
-              </p>
-              <ul className="menu-list">
-                <li><a>Team Settings</a></li>
-                <li>
-                  <a>Manage Your Team</a>
-                  <ul>
-                    <li><a>Members</a></li>
-                    <li><a>Plugins</a></li>
-                    <li><a>Add a member</a></li>
-                    <li><a>Remove a member</a></li>
-                  </ul>
-                </li>
-                <li><a>Invitations</a></li>
-                <li><a>Cloud Storage Environment Settings</a></li>
-                <li><a>Authentication</a></li>
-                <li><a>Payments</a></li>
-              </ul>
-              <p className="menu-label">
-                Transactions
-              </p>
-              <ul className="menu-list">
-                <li><a>Payments</a></li>
-                <li><a>Transfers</a></li>
-                <li><a>Balance</a></li>
-                <li><a>Reports</a></li>
-              </ul>
             </aside>
           </div>
           <div className="column is-9">
 
-
-            <section className="info-tiles">
-              <div className="tile is-ancestor has-text-centered">
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">{inbox.length}</p>
-                    <p className="subtitle">Messages</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">{events.length}</p>
-                    <p className="subtitle">Events</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">3.4k</p>
-                    <p className="subtitle">Open Orders</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">19</p>
-                    <p className="subtitle">Exceptions</p>
-                  </article>
-                </div>
-              </div>
-            </section>
-
-
-
-            <section className="info-tiles">
-              <div className="tile is-ancestor has-text-centered">
-                <div className="tile is-parent">
-
-                </div>
-              </div>
-            </section>
-
             <div className="container">
-              <div className="section">
-                <div className="columns">
-                  <div className="column has-text-centered">
+              <section className="info-tiles">
+                <div className="tile is-ancestor has-text-centered">
+                  <div className="tile is-parent">
+                    <article className="tile is-child box">
+                      <p className="title">{inbox.length}</p>
+                      <p className="subtitle">Messages</p>
+                    </article>
+                  </div>
+                  <div className="tile is-parent">
+                    <article className="tile is-child box">
+                      <p className="title">{events.length}</p>
+                      <p className="subtitle">Events</p>
+                    </article>
+                  </div>
+                  <div className="tile is-parent">
+                    <article className="tile is-child box">
+                      <p className="title">3.4k</p>
+                      <p className="subtitle">Open Orders</p>
+                    </article>
+                  </div>
+                  <div className="tile is-parent">
+                    <article className="tile is-child box">
+                      <p className="title">1</p>
+                      <p className="subtitle">You</p>
+                    </article>
                   </div>
                 </div>
-                <div id="app" className="row columns is-multiline">
-                  <div v-for="card in cardData" key="card.id" className="column is-4">
-                    <div className="card large">
-                      <div className="card-image">
-                        <figure className="image is-16by9">
-                          <img src="" alt="Image" />
-                        </figure>
-                      </div>
-                      <div className="card-content">
-                        <div className="media">
-                          <div className="media-left">
-                            <figure className="image is-48x48">
-                              <img src="" alt="Image" />
-                            </figure>
-                          </div>
-                          <div className="media-content">
-                            <p className="title is-4 no-padding">{'{'}{'{'}card.user.title{'}'}{'}'}</p>
+              </section>
+              {events.map((event) => {
+                return <div key={event.id}>
+                  <Link key={event.id} to={{
+                    pathname: `/message/${event.id}`,
+                    state: {
+                      name: event.name
+                    }
+                  }}>
+                    <div className="container">
+                      <div className="box content">
 
-                            <p className="subtitle is-6">{'{'}{'{'}card.user.title{'}'}{'}'}</p>
+
+                        <article className="media">
+                          <figure className="media-left">
+              
+                              <img src={event.image} width={200}/>
+                    
+                          </figure>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>{event.name}</strong> 
+                                <br />
+                                <strong>Creator:</strong> <strong>{event.user.fullname}</strong> 
+                                <br />
+                                <strong>Date:</strong> <strong>{event.date}</strong>
+                                <br />
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+            </p>
+                            </div>
+                            <button className="button is-black">See this event</button>
                           </div>
-                        </div>
-                        <div className="content">
-                          {'{'}{'{'}card.content{'}'}{'}'}
-                          <div className="background-icon"><span className="icon-twitter" /></div>
-                        </div>
+                          <div className="media-right">
+                
+                          </div>
+                        </article>
+
+
+
+
                       </div>
+
+
                     </div>
-                  </div>
+                  </Link>
                 </div>
-              </div>
+              })}
             </div>
 
 
 
 
-
-
-
-
             <div className="columns">
-
-
               <div className="column is-6">
-
               </div>
             </div>
           </div>
