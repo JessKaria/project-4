@@ -37,7 +37,7 @@ def create_event():
     event_dict = request.json
     try:
         event = event_schema.load(event_dict)
-        event.users = g.current_user
+        event.user = g.current_user
     except ValidationError as e:
         return { 'errors': e.messages, 'messages': ' Aye papi! Somethang wrong!' }
     event.save()
@@ -50,7 +50,7 @@ def create_event():
 def edit_event(event_id):
     find_event = Event.query.get(event_id)
     event_dict = request.json
-    if find_event.users != g.current_user:
+    if find_event.user != g.current_user:
         return {'errors': 'This is not your event to edit ☠️!'}, 402
     try:
         event = event_schema.load(

@@ -3,11 +3,14 @@ from app import db, bcrypt
 from models.base import BaseModel
 from models.message import Message
 from models.conversation import Conversation
+from models.comments import Comment
 from models.events import Event
 from sqlalchemy.ext.hybrid import hybrid_property
 import jwt
 from datetime import *
 from config.environment import secret
+
+
 
 class User(db.Model, BaseModel):
     __tablename__ = 'users'
@@ -17,10 +20,11 @@ class User(db.Model, BaseModel):
     headline = db.Column(db.Text)
     photo = db.Column(db.Text)
 
+
     #?relationship to conversation & message
 
-    events = db.relationship('Event', backref='users', cascade="all, delete")
-    comments = db.relationship('Comment', backref='users', cascade="all, delete")
+    events = db.relationship('Event', backref='user', cascade="all, delete")
+    comments = db.relationship('Comment', backref='user', cascade="all, delete")
     messages = db.relationship('Message', backref='user', cascade='all, delete')
     #? two sides of the conversation have their ID's stored in the conversation table
 

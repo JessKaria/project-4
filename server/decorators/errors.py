@@ -11,7 +11,10 @@ def validation_error(e):
 def general_error(e):
     return {"errors": str(e), "messages": "Something went wrong"}
 
-@validates('email')
-def validate_email(self, key, address):
-    assert '@' in address, "You must have a valid email address"
-    return address
+@app.errorhandler(AssertionError)
+def assertion_error(e):
+    return { "messages": str(e)  }, 400
+
+@app.errorhandler(AttributeError)
+def attribute_error(e):
+    return { "errors": str(e), "messages": "Something went wrong" }, 400

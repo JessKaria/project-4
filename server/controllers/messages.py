@@ -18,19 +18,23 @@ router = Blueprint(__name__, 'messages')
 
 #!! Check if the users are in the conversation table.
 #! and if yes will recurn the convo
+#! if no return message to start conversation
 
 #! Needs to work for both sides - YOU ARE SO CLOSE - CMON SON!
+
 
 @router.route('/check-convo/<user2_id>', methods=['GET'])
 @secure_route
 def check_conversation_exists(user2_id):
-
-    if not g.current_user:
-        return { 'Access denied!' }
     current_user = g.current_user.id
-    conversation = Conversation.query.filter_by(userone_id=current_user, usertwo_id=user2_id)
-    if not conversation:
-        return 'You need to create a conversation!'
+    conversation = Conversation.query.filter_by(userone_id=current_user, usertwo_id=user2_id).all()
+    conversation2 = Conversation.query.filter_by(userone_id=user2_id, usertwo_id=current_user).all()
+    c = len(conversation)
+    c2 = len(conversation2)
+    print(c)
+    print(c2)
+    if (c == 0) and (c2 == 0):
+        return 'You need to start a new conversation'
     return conversation_schema.jsonify(conversation, many=True)
 
 
@@ -54,12 +58,18 @@ def create_conversation(user_two_id):
 @secure_route
 def inbox():
     conversations = Conversation.query.filter_by(userone_id=g.current_user.id).all()
-    if not conversations:
-        return 'You need to create a new conversation '
     return conversation_schema.jsonify(conversations, many=True), 200
 
 
-#? Send messag
+
+@router.route('/messages', methods=['GET'])
+@secure_route
+def get_all_messages():
+    all_messages = Message.query.filter_by(user_id=g.current_user.id)
+    return message_schema.jsonify(all_messages, many=True)
+
+
+#? Send messages
 @router.route('/send-message/<convo_id>', methods=['POST'])
 @secure_route
 def send_message(convo_id):
