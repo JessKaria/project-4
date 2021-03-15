@@ -11,9 +11,8 @@ const Dashboard = ({ history }) => {
   const [loading, updateLoading] = useState(true)
   const token = localStorage.getItem('token')
   const [inbox, updateInbox] = useState({})
-
-
   const user = getLoggedInUserId()
+
 
   useEffect(() => {
     axios.get('/api/inbox', {
@@ -21,10 +20,11 @@ const Dashboard = ({ history }) => {
     })
       .then(({ data }) => {
         updateInbox(data)
+
       })
   }, [])
 
-  console.log(inbox)
+
 
   useEffect(() => {
     axios.get('/api/event', {
@@ -35,6 +35,9 @@ const Dashboard = ({ history }) => {
         updateLoading(false)
       })
   }, [])
+
+
+
 
   useEffect(() => {
     axios.get('/api/profile', {
@@ -61,105 +64,133 @@ const Dashboard = ({ history }) => {
         <div className="hero-body">
           <div className="container">
             <h1 className="title is-1 ">Welcome back {profile.username}</h1>
-            <h2 className="subtitle">A simple boilerplate for setting up parallax <br /> using the Bulma Hero container.</h2>
+            <h2 className="subtitle">A simple boilerplate for setting up parallax.</h2>
             <a href="#" className="button is-white is-medium is-inverted">Discover Events<i className="fad fa-chevron-right" /></a>
           </div>
         </div>
       </section>
-      <section className="section">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-3">
-              <aside className="is-medium menu">
-                <p className="menu-label">categories</p>
-                <div className="card">
-                  <div className="card-image">
-                    <figure className="image is-4by3">
-                      <img src={profile.photo} />
-                    </figure>
+      <div className="container">
+        <div className="columns">
+          <div className="column is-3 ">
+            <aside className="menu is-hidden-mobile">
+              <p className="menu-label">
+                General
+              </p>
+              <ul className="menu-list">
+                <li><a className="is-active">Dashboard</a></li>
+                <li><a>Customers</a></li>
+                <li><a>Other</a></li>
+              </ul>
+              <p className="menu-label">
+                Administration
+              </p>
+              <ul className="menu-list">
+                <li><a>Team Settings</a></li>
+                <li>
+                  <a>Manage Your Team</a>
+                  <ul>
+                    <li><a>Members</a></li>
+                    <li><a>Plugins</a></li>
+                    <li><a>Add a member</a></li>
+                    <li><a>Remove a member</a></li>
+                  </ul>
+                </li>
+                <li><a>Invitations</a></li>
+                <li><a>Cloud Storage Environment Settings</a></li>
+                <li><a>Authentication</a></li>
+                <li><a>Payments</a></li>
+              </ul>
+              <p className="menu-label">
+                Transactions
+              </p>
+              <ul className="menu-list">
+                <li><a>Payments</a></li>
+                <li><a>Transfers</a></li>
+                <li><a>Balance</a></li>
+                <li><a>Reports</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div className="column is-9">
+
+
+            <section className="info-tiles">
+              <div className="tile is-ancestor has-text-centered">
+                <div className="tile is-parent">
+                  <article className="tile is-child box">
+                    <p className="title">{inbox.length}</p>
+                    <p className="subtitle">Messages</p>
+                  </article>
+                </div>
+                <div className="tile is-parent">
+                  <article className="tile is-child box">
+                    <p className="title">{events.length}</p>
+                    <p className="subtitle">Events</p>
+                  </article>
+                </div>
+                <div className="tile is-parent">
+                  <article className="tile is-child box">
+                    <p className="title">3.4k</p>
+                    <p className="subtitle">Open Orders</p>
+                  </article>
+                </div>
+                <div className="tile is-parent">
+                  <article className="tile is-child box">
+                    <p className="title">19</p>
+                    <p className="subtitle">Exceptions</p>
+                  </article>
+                </div>
+              </div>
+            </section>
+
+
+
+            <section className="info-tiles">
+              <div className="tile is-ancestor has-text-centered">
+                <div className="tile is-parent">
+
+                </div>
+              </div>
+            </section>
+
+            <div className="container">
+              <div className="section">
+                <div className="columns">
+                  <div className="column has-text-centered">
                   </div>
-                  <div className="card-content">
-                    <div className="media">
-                      <div className="media-left">
-                        <figure className="image is-48x48">
-                          <img src={profile.photo} alt="Placeholder image" />
+                </div>
+                <div id="app" className="row columns is-multiline">
+                  <div v-for="card in cardData" key="card.id" className="column is-4">
+                    <div className="card large">
+                      <div className="card-image">
+                        <figure className="image is-16by9">
+                          <img src="" alt="Image" />
                         </figure>
                       </div>
-                      <div className="media-content">
-                        <p className="title is-4">{profile.fullname}</p>
-                        <p className="subtitle is-6">@{profile.username}</p>
+                      <div className="card-content">
+                        <div className="media">
+                          <div className="media-left">
+                            <figure className="image is-48x48">
+                              <img src="" alt="Image" />
+                            </figure>
+                          </div>
+                          <div className="media-content">
+                            <p className="title is-4 no-padding">{'{'}{'{'}card.user.title{'}'}{'}'}</p>
+
+                            <p className="subtitle is-6">{'{'}{'{'}card.user.title{'}'}{'}'}</p>
+                          </div>
+                        </div>
+                        <div className="content">
+                          {'{'}{'{'}card.content{'}'}{'}'}
+                          <div className="background-icon"><span className="icon-twitter" /></div>
+                        </div>
                       </div>
                     </div>
-                    <div className="content">{profile.headline}<br /></div>
                   </div>
                 </div>
-                <p className="menu-label">General</p>
-                <ul className="menu-list">
-                  <li><a>Inbox</a></li>
-                  <li><a>Friends</a></li>
-                </ul>
-                <p className="menu-label">Categories</p>
-                <ul className="menu-list">
-                  <li><a>Team Settings</a></li>
-                  <li>
-                    <a className="is">Manage Your Team</a>
-                    {inbox.map((i) => {
-                      return <div key={i.id}>
-                        <Link key={i.id} to={{
-                          pathname: '/message/${event.id}'
-                        }}>
-                          <p>{inbox.create_at}</p>
-                        </Link>
-                      </div>
-                    })}
-
-                  </li>
-                </ul>
-
-
-              </aside>
+              </div>
             </div>
 
-            <div className="column is-9">
-
-              <div className="content is-medium">
-                <h3 className="title is-3"> ¯\_(ツ)_/¯</h3>
-
-                <div className="box">
-
-
-                  <div className="container">
-                    {events.map((event) => {
-                      return <div key={event.id}>
-                        <Link key={event.id} to={{
-                          pathname: `/message/${event.id}`,
-                          state: {
-                            name: event.name
-                          }
-                        }}>
-
-                          <article className="message is-primary">
-
-
-                            <div className="card">
-                              <div className="card-content">
-                                <figure className="image is-4by3">
-                                  <img src={event.image} alt="Placeholder image" />
-                                </figure>
-                                <h4 id="const" className="title is-3">{event.name}</h4>
-                                <div className="content">{event.description}</div>
-
-                              </div>
-                            </div>
-
-                            <span className="icon has-text-primary">
-                              <i className="fab fa-js" />
-                            </span>
-                          </article>
-                        </Link>
-                      </div>
-                    })}
-                  </div>
 
 
 
@@ -167,24 +198,16 @@ const Dashboard = ({ history }) => {
 
 
 
+            <div className="columns">
 
 
+              <div className="column is-6">
 
-
-
-
-
-
-
-
-
-
-                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
 
 

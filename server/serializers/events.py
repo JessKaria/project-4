@@ -20,6 +20,7 @@ class SimpleEventSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
     comments = fields.Nested("CommentSchema", many=True)
     category = fields.Nested("CategorySchema", many=True)
+    user = fields.Nested('UserSchema')
 
 
         

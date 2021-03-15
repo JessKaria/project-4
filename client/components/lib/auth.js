@@ -7,6 +7,9 @@ export function getLoggedInUserId() {
   return payloadAsObject.sub
 }
 
+const logged = getLoggedInUserId()
+console.log(logged)
+
 
 export function isCreator(userIdToCompare) {
   if (!userIdToCompare) return false 

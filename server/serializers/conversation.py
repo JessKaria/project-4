@@ -9,7 +9,7 @@ class ConversationSchema(ma.SQLAlchemyAutoSchema):
         model = Conversation
         load_instance = True
 
-    user = fields.Nested("UserSchema", many=True)
+    user = fields.Nested("UserSchema")
     message = fields.Nested("MessageSchema", many=True)
 
 
