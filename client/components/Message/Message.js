@@ -55,15 +55,17 @@ const Message = ({ match }) => {
     try {
       const { data } = await axios.post(`/api/send-message/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
+        
       })
       history.push('/dashboard')
-      
+      console.log(data)
 
     } catch (err) {
       console.log(err.response.data)
     }
   }
 
+  console.log(formData)
   
 
 

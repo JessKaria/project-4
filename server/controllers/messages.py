@@ -93,4 +93,4 @@ def send_message(convo_id):
     message.conversation_id = convo_id
     message.save()
     print(message)
-    return 'success', 200
+    return message_schema.jsonify(message), 200

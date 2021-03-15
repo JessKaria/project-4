@@ -65,6 +65,7 @@ const Register = ({ history }) => {
       console.log(data)
     } catch (err) {
       console.log(err.response.data)
+      
     }
 
 

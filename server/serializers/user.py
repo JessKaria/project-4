@@ -1,6 +1,7 @@
 from app import ma
 from models.user import User
 from marshmallow import fields
+from models.conversation import Conversation
 
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -12,3 +13,4 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 
     password = fields.String(required=True)
     event = fields.Nested('SimpleEventSchema', many=True)
+    conversation = fields.Nested('SimpleConversationSchema', many=True)
