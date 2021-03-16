@@ -12,6 +12,5 @@ class MessageSchema(ma.SQLAlchemyAutoSchema):
         
     user = fields.Nested("UserSchema")
     user = fields.Nested("UserSchema")
-    
 
     

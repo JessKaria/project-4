@@ -10,14 +10,14 @@ class ConversationSchema(ma.SQLAlchemyAutoSchema):
         model = Conversation
         load_instance = True
 
-    user = fields.Nested("UserSchema")
+    user = fields.Nested("UserSchema", only=("id", "title", "username", "photo"))
     message = fields.Nested("MessageSchema", many=True)
 
 class SimpleConversationSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Conversation
         load_instance = True
-    user = fields.Nested("UserSchema")
+    user = fields.Nested("UserSchema" , only=("id", "title", "username", "photo"))
     message = fields.Nested("MessageSchema", many=True)
 
 

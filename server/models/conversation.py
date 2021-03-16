@@ -4,6 +4,7 @@ from models.base import BaseModel
 
 
 
+
 class Conversation(db.Model, BaseModel):
     __tablename__ = 'conversations'
 
@@ -11,7 +12,7 @@ class Conversation(db.Model, BaseModel):
     #? conversation relationship with message
     #! 1
     convo = db.Column(db.Text)
-    c_messages = db.relationship('Message', backref='c_user', cascade='all, delete')
+    c_messages = db.relationship('Message', backref='users', cascade='all, delete')
 
 
     #?this needs two FK userids? 

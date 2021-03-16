@@ -9,6 +9,7 @@ const Message = ({ match, history }) => {
   const [event, updateEvent] = useState({})
   const [convo, updateConvo] = useState({})
   const [user, updateUser] = useState({})
+  const [chat, getChat] = useState({})
   const token = localStorage.getItem('token')
   const id = match.params.id
 
@@ -36,8 +37,6 @@ const Message = ({ match, history }) => {
       })
   }, [])
 
-  console.log(convo)
-  console.log(user)
 
   useEffect(() => {
     axios.get(`/api/event/${id}`, {
@@ -79,8 +78,21 @@ const Message = ({ match, history }) => {
   }
 
 
+  async function getMessages(event) {
+    event.preventDefault()
+    try {
+      const { data } = await axios.get(`/api/convo-history/${convo.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+        
+      })
+      getChat(data)
+      console.log(data)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
 
-
+  console.log(chat)
 
 
 
@@ -138,7 +150,7 @@ const Message = ({ match, history }) => {
     </>
   }
 
-  //! no previous history create convo
+  //! yes there is previous history - return all messages in that conversation
 
   return <>
     <div>
@@ -165,7 +177,7 @@ const Message = ({ match, history }) => {
                           <h1 className="title post-title">{event.name}</h1>
                           <p className="post-excerpt">{event.description}</p>
                           <br />
-                          <a href="#" className="button is-primary">Read More</a>
+                          <a onClick={getMessages} className="button is-primary">See chat history</a>
                         </div>
                       </div>
                     </article>

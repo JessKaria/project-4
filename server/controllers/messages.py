@@ -67,6 +67,14 @@ def get_all_messages():
     return message_schema.jsonify(all_messages, many=True)
 
 
+#! get messages by conversation ID
+@router.route('/convo-history/<convo_id>', methods=['GET'])
+@secure_route
+def get_conversation(convo_id):
+    convo_history = Message.query.filter_by(conversation_id=convo_id)
+    return message_schema.jsonify(convo_history, many=True)
+
+
 @router.route('/sent', methods=['GET'])
 @secure_route
 def get_sent_messages():
