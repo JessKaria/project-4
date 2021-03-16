@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
+import ContinueChatting from './ContinueChatting'
 
 
 const Message = ({ match, history }) => {
@@ -11,6 +12,8 @@ const Message = ({ match, history }) => {
   const [user, updateUser] = useState({})
   const [chat, getChat] = useState({})
   const token = localStorage.getItem('token')
+  const [modal, showModal] = useState(false)
+  
   const id = match.params.id
 
   const [formData, updateFormData] = useState({
@@ -78,21 +81,6 @@ const Message = ({ match, history }) => {
   }
 
 
-  async function getMessages(event) {
-    event.preventDefault()
-    try {
-      const { data } = await axios.get(`/api/convo-history/${convo.id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-        
-      })
-      getChat(data)
-      console.log(data)
-    } catch (err) {
-      console.log(err.response.data)
-    }
-  }
-
-  console.log(chat)
 
 
 
@@ -177,7 +165,8 @@ const Message = ({ match, history }) => {
                           <h1 className="title post-title">{event.name}</h1>
                           <p className="post-excerpt">{event.description}</p>
                           <br />
-                          <a onClick={getMessages} className="button is-primary">See chat history</a>
+                          <a  className="button is-primary">See chat history</a>
+                          <ContinueChatting history={history} getChat={getChat} convo={convo}  />
                         </div>
                       </div>
                     </article>

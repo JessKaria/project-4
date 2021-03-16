@@ -10,6 +10,7 @@ from serializers.message import MessageSchema
 from serializers.conversation import ConversationSchema
 from marshmallow.exceptions import ValidationError
 
+
 user_schema = UserSchema()
 message_schema = MessageSchema()
 conversation_schema = ConversationSchema()
