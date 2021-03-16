@@ -19,14 +19,14 @@ $family-paragraph: 'Montserrat', sans-serif;
 $grey-dark: $brown;
 $light: $beige-light;
 $primary: rgb(49, 56, 83);
-$link: rgb(0, 4, 255);
+$link: rgb(10, 10, 10);
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 $button-color: rgb(49, 56, 83);
 
 
 // Update some of Bulma's component variables
-$body-background-color: #e6e7ee;
+$body-background-color: #e2d0d0;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
@@ -39,7 +39,9 @@ $title-size: 60px;
   border-radius: 0px;
 }
 
-
+.small-picture {
+  max-width: 150px;
+}
 
 .container {
   margin: 20px;
@@ -53,7 +55,6 @@ html {
 body {
   height: 100%;
 }
-
 
 
 p.title {

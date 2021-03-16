@@ -12,6 +12,7 @@ const Dashboard = ({ history }) => {
   const token = localStorage.getItem('token')
   const [inbox, updateInbox] = useState({})
   const user = getLoggedInUserId()
+  console.log(events)
 
 
 
@@ -124,39 +125,39 @@ const Dashboard = ({ history }) => {
                 </div>
               </div>
             </section>
-            <div className="contain">
 
-
-
-              <div className="contain">
-                {inbox.map((inb) => {
-                  return <div key={inb.id}>
-                    <div className="box content">
-                      <article className="post">
-                        <h4>{inb.subject}</h4>
-                        <div className="media">
-                          <div className="media-left">
-                            <p className="image is-32x32">
-                              <img src="http://bulma.io/images/placeholders/128x128.png" />
-                            </p>
-                          </div>
-                          <div className="media-content">
-                            <div className="content">
-                              <p>
-                                <a href="#">@jsmith</a> replied 34 minutes ago &nbsp;<span className="tag">Question</span>
-                              </p>
-                            </div>
-                          </div>
-                          <div className="media-right">
-                            <span className="has-text-grey-light"><i className="fa fa-comments" /> 1</span>
-                          </div>
-                        </div>
-                      </article>
-                    </div>
-                  </div>
-                })}
-              </div>
+            <div className="container">
+              {events.map((event) => {
+                return <div key={event.id}>
+                  <Link key={event.id} to={{
+                    pathname: `/message/${event.id}`,
+                    state: {
+                      name: event.name
+                    }
+                  }}>
+                    <article className="columns is-multiline">
+                      <div className="column is-12 post-img">
+                        <img src={event.image} alt="Featured Image" />
+                      </div>
+                      <div className="column is-12 featured-content ">
+                        <h3 className="heading post-category">{event.date} | {event.start_time} | {event.duration}</h3>
+                        <h1 className="title post-title">{event.name}</h1>
+                        <p className="post-excerpt">{event.description}</p>
+                        <br />
+                        <button className="button is-dark">Find Out More</button>
+                      </div>
+                    </article>
+                  </Link>
+                </div>
+              })}
             </div>
+
+
+
+
+
+
+
           </div>
         </div>
       </div>

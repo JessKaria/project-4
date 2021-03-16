@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
-import ContinueChatting from './ContinueChatting'
 
 
 const Message = ({ match, history }) => {
   const [profile, updateProfile] = useState([])
   const [event, updateEvent] = useState({})
   const [convo, updateConvo] = useState({})
+  const [messages, updateMessages] = useState(false)
+  const [createChat, updateCreateChat] = useState(false)
   const [user, updateUser] = useState({})
+  const [newConvo, updateNewConvo] = useState({})
   const [chat, getChat] = useState({})
   const token = localStorage.getItem('token')
-  const [modal, showModal] = useState(false)
-  
   const id = match.params.id
+
+  const chatHistory = chat
+  console.log(chatHistory)
 
   const [formData, updateFormData] = useState({
     subject: '',
@@ -53,15 +56,13 @@ const Message = ({ match, history }) => {
 
 
 
-
-  async function handleSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit() {
+    // event.preventDefault()
     console.log(token)
     try {
       const { data } = await axios.post(`/api/send-message/${convo.id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      console.log(data)
     } catch (err) {
       console.log(err.response.data)
     }
@@ -74,16 +75,28 @@ const Message = ({ match, history }) => {
       const { data } = await axios.post(`/api/create-convo/${user.id}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
+      updateNewConvo(data.id)
       console.log(data)
+      updateCreateChat(!createChat)
     } catch (err) {
       console.log(err.response.data)
     }
   }
 
+  async function getMessages(event) {
+    event.preventDefault()
+    try {
+      const { data } = await axios.get(`/api/convo-history/${convo.id}`, {
+        headers: { Authorization: `Bearer ${token}` }
 
+      })
+      getChat(data)
+      updateMessages(!messages)
+    } catch (err) {
+      console.log(err.response.data)
+    }
 
-
-
+  }
 
 
 
@@ -115,27 +128,110 @@ const Message = ({ match, history }) => {
                             <h1 className="title post-title">{event.name}</h1>
                             <p className="post-excerpt">{event.description}</p>
                             <br />
-                            <a onClick={handleConvo} className="button is-primary">Send a message!</a>
+                            <button className="button is-primary" onClick={handleConvo}  > Create a chat</button>
                           </div>
                         </div>
                       </article>
                     </div>
                   </div>
                   <hr />
-                  <div className="column">
-                    <div className="column">
+
+                  {createChat === true ?
+
+
+                    <div className="columns">
+                      <div className="column">
+                        <article className="media">
+                          <figure className="media-left">
+                            <p className="image is-120x120">
+                              <img className="small-picture" src={user.photo} width={5} />
+                            </p>
+                          </figure>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <strong>Hosted by: <br />
+                                  {user.fullname} </strong>
+                                <small>@{user.username}</small>
+                                <br />{user.headline}</p>
+                              <br />
+                              <small>
+                                <strong>Duration: </strong>{event.duration} <br />
+                                <strong>Average attendee age: </strong>{event.target_age} <br />
+                                <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                                <strong>Start Time: </strong>{event.start_time} <br />
+                              </small>
+                            </div>
+                            <nav className="level is-mobile">
+                              <div className="level-left">
+                                <a className="level-item">
+                                  <span className="icon is-small"><i className="fas fa-reply" /></span>
+                                </a>
+                                <a className="level-item">
+                                  <span className="icon is-small"><i className="fas fa-retweet" /></span>
+                                </a>
+                                <a className="level-item">
+                                  <span className="icon is-small"><i className="fas fa-heart" /></span>
+                                </a>
+                              </div>
+                            </nav>
+                          </div>
+                          <div className="media-right">
+                          </div>
+                        </article>
+
+
+                      </div>
+                      <div className="column">
+                        <form onSubmit={handleSubmit} className='field'  >
+                          <div className="field"  >
+                            <div className="control">
+                              <input
+                                className="input is-medium"
+                                type="text"
+                                placeholder="Subject"
+                                value={formData.subject}
+                                onChange={handleChange}
+                                name={'subject'}
+                              />
+                            </div>
+                          </div>
+                          <div className="field">
+                            <div className="control">
+                              <input
+                                className="input is-medium"
+                                type="text"
+                                placeholder="Message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                name={'message'}
+                              />
+                            </div>
+                          </div>
+                          <div className="field">
+                            <div className="control">
+                            </div>
+                          </div>
+                          <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
+                          <br />
+                          <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
+                        </form>
+
+                      </div>
 
                     </div>
-
-                  </div>
+                    :
+                    <div></div>
+                  }
                 </div>
               </div>
             </div>
           </div>
-
         </section>
       </div>
+
     </>
+
   }
 
   //! yes there is previous history - return all messages in that conversation
@@ -165,8 +261,8 @@ const Message = ({ match, history }) => {
                           <h1 className="title post-title">{event.name}</h1>
                           <p className="post-excerpt">{event.description}</p>
                           <br />
-                          <a  className="button is-primary">See chat history</a>
-                          <ContinueChatting history={history} getChat={getChat} convo={convo}  />
+                          <a onClick={getMessages} className="button is-primary">Check previous messages</a>
+                        
                         </div>
                       </div>
                     </article>
@@ -177,39 +273,95 @@ const Message = ({ match, history }) => {
                   <div className="column">
 
                   </div>
-                  <form onSubmit={handleSubmit} className='field'  >
-                    <div className="field"  >
-                      <div className="control">
-                        <input
-                          className="input is-medium"
-                          type="text"
-                          placeholder="Subject"
-                          value={formData.subject}
-                          onChange={handleChange}
-                          name={'subject'}
-                        />
-                      </div>
+
+
+                  <div className="columns">
+                    <div className="column">
+                      <article className="media">
+                        <figure className="media-left">
+                          <p className="image is-120x120">
+                            <img className="small-picture" src={user.photo} width={5} />
+                          </p>
+                        </figure>
+                        <div className="media-content">
+                          <div className="content">
+                            <p>
+                              <strong>Hosted by: <br />
+                                {user.fullname} </strong>
+                              <small>@{user.username}</small>
+                              <br />{user.headline}</p>
+                            <br />
+                            <small>
+                              <strong>Duration: </strong>{event.duration} <br />
+                              <strong>Average attendee age: </strong>{event.target_age} <br />
+                              <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                              <strong>Start Time: </strong>{event.start_time} <br />
+                            </small>
+                          </div>
+                          <nav className="level is-mobile">
+                            <div className="level-left">
+                              <a className="level-item">
+                                <span className="icon is-small"><i className="fas fa-reply" /></span>
+                              </a>
+                              <a className="level-item">
+                                <span className="icon is-small"><i className="fas fa-retweet" /></span>
+                              </a>
+                              <a className="level-item">
+                                <span className="icon is-small"><i className="fas fa-heart" /></span>
+                              </a>
+                            </div>
+                          </nav>
+                        </div>
+                        <div className="media-right">
+                        </div>
+                      </article>
+
+
                     </div>
-                    <div className="field">
-                      <div className="control">
-                        <input
-                          className="input is-medium"
-                          type="text"
-                          placeholder="Message"
-                          value={formData.message}
-                          onChange={handleChange}
-                          name={'message'}
-                        />
-                      </div>
+                    <div className="column">
+                      <form onSubmit={handleSubmit} className='field'  >
+                        <div className="field"  >
+                          <div className="control">
+                            <input
+                              className="input is-medium"
+                              type="text"
+                              placeholder="Subject"
+                              value={formData.subject}
+                              onChange={handleChange}
+                              name={'subject'}
+                            />
+                          </div>
+                        </div>
+                        <div className="field">
+                          <div className="control">
+                            <input
+                              className="input is-medium"
+                              type="text"
+                              placeholder="Message"
+                              value={formData.message}
+                              onChange={handleChange}
+                              name={'message'}
+                            />
+                          </div>
+                        </div>
+                        <div className="field">
+                          <div className="control">
+                          </div>
+                        </div>
+                        <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
+                        <br />
+                        <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
+                      </form>
+
                     </div>
-                    <div className="field">
-                      <div className="control">
-                      </div>
-                    </div>
-                    <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
-                    <br />
-                    <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
-                  </form>
+
+                  </div>
+
+
+
+
+
+
                 </div>
               </div>
             </div>
