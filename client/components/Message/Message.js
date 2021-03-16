@@ -5,7 +5,7 @@ import { getLoggedInUserId } from '../lib/auth'
 
 
 
-const Message = ({ match }) => {
+const Message = ({ match, history }) => {
   const [profile, updateProfile] = useState([])
   const [event, updateEvent] = useState({})
   const token = localStorage.getItem('token')
@@ -55,18 +55,19 @@ const Message = ({ match }) => {
     try {
       const { data } = await axios.post(`/api/send-message/${id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
-        
+
       })
-      history.push('/dashboard')
+
       console.log(data)
 
     } catch (err) {
       console.log(err.response.data)
     }
+    history.push('/dashboard')
   }
 
   console.log(formData)
-  
+
 
 
 
@@ -74,8 +75,14 @@ const Message = ({ match }) => {
 
   if (profile.length === 0) {
     return <div>
+      <section className="hero is-small">
+        <div className="hero-body">
+          <div className="container">
+          </div>
+        </div>
+      </section>
       <section className="hero is-fullheight">
-        <div className="containers">
+        <div className="container">
           <div className="hero is-fullheight">
             <div className="columns">
               <div className="column is-10 is-offset-1">
@@ -120,6 +127,12 @@ const Message = ({ match }) => {
 
   return <>
     <div>
+      <section className="hero is-small">
+        <div className="hero-body">
+          <div className="container">
+          </div>
+        </div>
+      </section>
       <section className="hero is-fullheight">
         <div className="containers">
           <div className="hero is-fullheight">
@@ -146,7 +159,7 @@ const Message = ({ match }) => {
                 <hr />
                 <div className="column">
                   <div className="column">
-                    
+
                   </div>
                   <form onSubmit={handleSubmit} className='field'  >
                     <div className="field"  >

@@ -124,42 +124,39 @@ const Dashboard = ({ history }) => {
                 </div>
               </div>
             </section>
-              <div className="containers">
-              <article className="media">
-        <figure className="media-left">
-          <p className="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png" />
-          </p>
-        </figure>
-        <div className="media-content">
-          <div className="content">
-            <p>
-              <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-            </p>
-          </div>
-          <nav className="level is-mobile">
-            <div className="level-left">
-              <a className="level-item">
-                <span className="icon is-small"><i className="fas fa-reply" /></span>
-              </a>
-              <a className="level-item">
-                <span className="icon is-small"><i className="fas fa-retweet" /></span>
-              </a>
-              <a className="level-item">
-                <span className="icon is-small"><i className="fas fa-heart" /></span>
-              </a>
-            </div>
-          </nav>
-        </div>
-        <div className="media-right">
-          <button className="delete" />
-        </div>
-      </article>
+            <div className="contain">
 
 
+
+              <div className="contain">
+                {inbox.map((movie) => {
+                  return <div key={movie.id}>
+                    <div className="box content">
+                      <article className="post">
+                        <h4>Bulma: How do you center a button in a box?</h4>
+                        <div className="media">
+                          <div className="media-left">
+                            <p className="image is-32x32">
+                              <img src="http://bulma.io/images/placeholders/128x128.png" />
+                            </p>
+                          </div>
+                          <div className="media-content">
+                            <div className="content">
+                              <p>
+                                <a href="#">@jsmith</a> replied 34 minutes ago &nbsp;<span className="tag">Question</span>
+                              </p>
+                            </div>
+                          </div>
+                          <div className="media-right">
+                            <span className="has-text-grey-light"><i className="fa fa-comments" /> 1</span>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                })}
               </div>
+            </div>
           </div>
         </div>
       </div>

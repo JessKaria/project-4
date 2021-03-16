@@ -26,7 +26,7 @@ $button-color: rgb(49, 56, 83);
 
 
 // Update some of Bulma's component variables
-$body-background-color: #8a9ef5;
+$body-background-color: #e6e7ee;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
@@ -39,10 +39,7 @@ $title-size: 60px;
   border-radius: 0px;
 }
 
-.containers {
-  margin: 40px;
-  background-color: rgb(224, 191, 191);
-}
+
 
 .container {
   margin: 20px;
@@ -65,16 +62,15 @@ p.title {
 
 .input, .textarea, .select select {
   background-color: white;
-  border-color: #cc0f35;
+  border-color: #000000;
   border-radius: 4px;
   color: #000000;
 }
 
-.container-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.contain {
+  margin-top: 20px;
 }
+
 
 #parallax-1 {
   background: url(https://source.unsplash.com/featured/?festivals);
