@@ -35,9 +35,9 @@ const Message = ({ match, history }) => {
         updateConvo(data[0])
       })
   }, [])
-  
-  console.log(convo.id)
 
+  console.log(convo)
+  console.log(user)
 
   useEffect(() => {
     axios.get(`/api/event/${id}`, {
@@ -48,6 +48,8 @@ const Message = ({ match, history }) => {
         updateUser(data.user)
       })
   }, [])
+
+
 
 
   async function handleSubmit(event) {
