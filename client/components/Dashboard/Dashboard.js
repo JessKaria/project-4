@@ -129,11 +129,11 @@ const Dashboard = ({ history }) => {
 
 
               <div className="contain">
-                {inbox.map((movie) => {
-                  return <div key={movie.id}>
+                {inbox.map((inb) => {
+                  return <div key={inb.id}>
                     <div className="box content">
                       <article className="post">
-                        <h4>Bulma: How do you center a button in a box?</h4>
+                        <h4>{inb.subject}</h4>
                         <div className="media">
                           <div className="media-left">
                             <p className="image is-32x32">

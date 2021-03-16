@@ -16,12 +16,7 @@ conversation_schema = ConversationSchema()
 
 router = Blueprint(__name__, 'messages')
 
-#!! Check if the users are in the conversation table.
-#! and if yes will recurn the convo
-#! if no return message to start conversation
-
-#! Needs to work for both sides - YOU ARE SO CLOSE - CMON SON!
-
+#? check if a conversation exists between the user and the event owner
 
 @router.route('/check-convo/<user2_id>', methods=['GET'])
 @secure_route
@@ -60,7 +55,7 @@ def create_conversation(user_two_id):
 @router.route('/inbox', methods=['GET'])
 @secure_route
 def inbox():
-    conversations = Conversation.query.filter_by(userone_id=g.current_user.id).all()
+    conversations = Conversation.query.filter_by(userone_id=g.current_user.id)
     return conversation_schema.jsonify(conversations, many=True), 200
 
 

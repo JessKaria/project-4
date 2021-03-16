@@ -52,7 +52,7 @@ const Login = ({ history }) => {
   return <>
     <section className="hero is-fullheight">
       <div className="hero-body">
-        <div className="container">
+        <div className="containers">
           <img src="https://logoipsum.com/logo/logo-1.svg" width="325px" />
           <form className='field' onSubmit={handleSubmit} >
 

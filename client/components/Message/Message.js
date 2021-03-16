@@ -4,13 +4,13 @@ import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
 
 
-
 const Message = ({ match, history }) => {
   const [profile, updateProfile] = useState([])
   const [event, updateEvent] = useState({})
+  const [convo, updateConvo] = useState({})
+  const [user, updateUser] = useState({})
   const token = localStorage.getItem('token')
   const id = match.params.id
-  const user = getLoggedInUserId()
 
   const [formData, updateFormData] = useState({
     subject: '',
@@ -20,13 +20,11 @@ const Message = ({ match, history }) => {
   function handleChange(event) {
     const name = event.target.name
     const value = event.target.value
-
     updateFormData({
       ...formData,
       [name]: value
     })
   }
-
 
   useEffect(() => {
     axios.get(`/api/check-convo/${id}`, {
@@ -34,9 +32,11 @@ const Message = ({ match, history }) => {
     })
       .then(({ data }) => {
         updateProfile(data)
+        updateConvo(data[0])
       })
   }, [])
-
+  
+  console.log(convo.id)
 
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const Message = ({ match, history }) => {
     })
       .then(({ data }) => {
         updateEvent(data)
+        updateUser(data.user)
       })
   }, [])
 
@@ -53,20 +54,33 @@ const Message = ({ match, history }) => {
     event.preventDefault()
     console.log(token)
     try {
-      const { data } = await axios.post(`/api/send-message/${id}`, formData, {
+      const { data } = await axios.post(`/api/send-message/${convo.id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
-
       })
-
       console.log(data)
-
     } catch (err) {
       console.log(err.response.data)
     }
     history.push('/dashboard')
   }
 
-  console.log(formData)
+  async function handleConvo(event) {
+    event.preventDefault()
+    try {
+      const { data } = await axios.post(`/api/create-convo/${user.id}`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      console.log(data)
+    } catch (err) {
+      console.log(err.response.data)
+    }
+  }
+
+
+
+
+
+
 
 
 
@@ -74,53 +88,52 @@ const Message = ({ match, history }) => {
   //! no previous history create convo
 
   if (profile.length === 0) {
-    return <div>
-      <section className="hero is-small">
-        <div className="hero-body">
-          <div className="container">
+    return <>
+      <div>
+        <section className="hero is-small">
+          <div className="hero-body">
+            <div className="container">
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="hero is-fullheight">
-        <div className="container">
-          <div className="hero is-fullheight">
-            <div className="columns">
-              <div className="column is-10 is-offset-1">
-                <div className="columns featured-post is-multiline">
-                  <div className="column is-12 post">
-                    <article className="columns featured">
-                      <div className="column is-7 post-img ">
-                        <img src={event.image} alt="" />
-                      </div>
-                      <div className="column is-5 featured-content va">
-                        <div>
-                          <h3 className="heading post-category">{event.date}</h3>
-                          <h1 className="title post-title">{event.name}</h1>
-                          <p className="post-excerpt">{event.description}</p>
-                          <br />
-
-
-                          <div className="container">
-                          </div>
-                          <a href="#" className="button is-primary">Read More</a>
-
+        </section>
+        <section className="hero is-fullheight">
+          <div className="containers">
+            <div className="hero is-fullheight">
+              <div className="columns">
+                <div className="column is-10 is-offset-1">
+                  <div className="columns featured-post is-multiline">
+                    <div className="column is-12 post">
+                      <article className="columns featured">
+                        <div className="column is-7 post-img ">
+                          <img src={event.image} alt="" />
                         </div>
-                      </div>
-                    </article>
+                        <div className="column is-5 featured-content va">
+                          <div>
+                            <h3 className="heading post-category">{event.date}</h3>
+                            <h1 className="title post-title">{event.name}</h1>
+                            <p className="post-excerpt">{event.description}</p>
+                            <br />
+                            <a onClick={handleConvo} className="button is-primary">Send a message!</a>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
                   </div>
-                </div>
-                <hr />
-                <div className="column is-wrap">
-                  <div className="column post is-4">
+                  <hr />
+                  <div className="column">
+                    <div className="column">
+
+                    </div>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   }
 
   //! no previous history create convo
@@ -190,7 +203,7 @@ const Message = ({ match, history }) => {
                       <div className="control">
                       </div>
                     </div>
-                    <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Submit</button>
+                    <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
                     <br />
                     <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
                   </form>
