@@ -3,7 +3,7 @@
 
 @charset "utf-8";
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
 // Set your brand colors
@@ -14,7 +14,7 @@ $beige-light: #f5f5f5;
 $darker-red: #f5f5f5;
 
 // Update Bulma's global variables
-$family-sans-serif: 'Bebas Neue', cursive;
+$family-sans-serif: 'Poppins', cursive;
 $family-paragraph: 'Montserrat', sans-serif;
 $grey-dark: $brown;
 $light: $beige-light;
@@ -26,7 +26,7 @@ $button-color: rgb(49, 56, 83);
 
 
 // Update some of Bulma's component variables
-$body-background-color: #e2d0d0;
+$body-background-color: #FCFCFC;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
@@ -39,12 +39,23 @@ $title-size: 60px;
   border-radius: 0px;
 }
 
+
 .small-picture {
   max-width: 150px;
 }
 
+.column.is-12-tablet {
+  flex: none;
+  width: 100%;
+  padding: 20px;
+}
+
 .container {
   margin: 20px;
+}
+
+.container-wrap {
+  margin: 100px;
 }
 
 html {
@@ -56,6 +67,9 @@ body {
   height: 100%;
 }
 
+.title.is-1 {
+  font-size: 3rem;
+  font-family: 'Poppins', sans-serif;}
 
 p.title {
   color: #000000;
@@ -63,8 +77,8 @@ p.title {
 
 .input, .textarea, .select select {
   background-color: white;
-  border-color: #000000;
-  color: #000000;
+  border-color: #010001;
+  color: #010001;
 }
 
 .contain {
@@ -78,11 +92,11 @@ p.title {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-top: 10px solid coral;
+  border-top: 10px solid 010001;
 }
 
 #parallax-1 hr {
-  background: coral;
+  background: 010001;
 }
 
 #parallax-2 {
@@ -91,11 +105,11 @@ p.title {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-top: 10px solid yellow;
+  border-top: 10px solid 010001;
 }
 
 #parallax-2 hr {
-  background: yellow;
+  background: 010001;
 }
 
 #parallax-3 {
@@ -104,9 +118,9 @@ p.title {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-top: 10px solid hotpink;
+  border-top: 10px solid 010001;
 }
 
 #parallax-3 hr {
-  background: hotpink;
+  background: 010001;
 }

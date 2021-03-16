@@ -65,115 +65,150 @@ const Register = ({ history }) => {
       console.log(data)
     } catch (err) {
       console.log(err.response.data)
-      
+
     }
 
 
   }
 
 
-
-
-
-
-
-
   return <>
-    <section className="hero is-fullheight is-black">
+    <section className="hero is-fullheight">
+
       <div className="hero-body">
+        <section className="container-wrap">
+          <div className="columns is-multiline">
+            <div className="column is-8 is-offset-2 register">
+              <div className="columns">
+                <div className="column left">
+                  <h1 className="title is-1">Discover awesome events.</h1>
+                  <h2 className="subtitle colored is-4">The best party hunting platform.</h2>
+                  <img src="https://images.unsplash.com/photo-1443186547344-2437c72a228e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D"></img>
+                </div>
+                <div className="column right has-text-centered">
+                  <form className='field' onSubmit={handleSubmit} >
+                    <br/>
+                    <div className="field"  >
+                      <div className="control">
+                        <input
+                          className="input is-medium"
+                          type="text"
+                          placeholder="Full Name"
+                          value={formData.fullname}
+                          onChange={handleChange}
+                          name={'fullname'}
+                        />
+                      </div>
+                    </div>
 
-        <main className='column'>
-          <div className='column is-flex is-flex-direction-column is-align-items-center'>
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input is-medium"
+                          type="text"
+                          placeholder="Username"
+                          value={formData.username}
+                          onChange={handleChange}
+                          name={'username'}
+                        />
+                      </div>
+                    </div>
 
-            <h3 className='title'>Join the club!</h3>
-            <form className='field' onSubmit={handleSubmit} >
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input is-medium"
+                          type="email"
+                          placeholder="Email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          name={'email'}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input is-medium"
+                          type="password"
+                          placeholder="Password"
+                          value={formData.password}
+                          onChange={handleChange}
+                          name={'password'}
+                        />
+                      </div>
+                    </div>
+
+
+                    <div className="field">
+                      <div className="control">
+                        <input
+                          className="input is-medium"
+                          type="text"
+                          placeholder="Headline"
+                          value={formData.headline}
+                          onChange={handleChange}
+                          name={'headline'}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <div className="control">
+                        <button className="button is-block is-danger is-fullwidth is-medium" onClick={handleUpload}>Add a profile picture.</button>
+                      </div>
+                    </div>
 
 
 
-              <div className='field'>
-                <label className='labels'>Fullname</label>
-                <div className='control'>
-                  <input className='input'
-                    type="text"
-                    value={formData.fullname}
-                    onChange={handleChange}
-                    name={'fullname'}
-                  />
+
+
+                    <button onSubmit={handleSubmit} className="button is-white is-medium is-fullwidth is-inverted">Submit</button>
+
+
+                    <small className="level-item" style={{ color: 'var(--textLight)' }}>
+                    © Super Cool Website. All Rights Reserved.</small>
+
+                  </form>
                 </div>
               </div>
-
-
-              <div className='field'>
-                <label className='labels'>Username</label>
-                <div className='control'>
-                  <input className='input'
-                    type="text"
-                    value={formData.username}
-                    onChange={handleChange}
-                    name={'username'}
-                  />
+            </div>
+            <div className="column is-8 is-offset-2">
+              <br />
+              <nav className="level">
+                <div className="level-left">
+                  <div className="level-item">
+                    <span className="icon">
+                      <i className="fab fa-twitter" />
+                    </span>
+                    <span className="icon">
+                      <i className="fab fa-facebook" />
+                    </span>
+                    <span className="icon">
+                      <i className="fab fa-instagram" />
+                    </span>
+                    <span className="icon">
+                      <i className="fab fa-github" />
+                    </span>
+                    <span className="icon">
+                      <i className="fas fa-envelope" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-
-              <div className='field'>
-                <label className='labels'>Email</label>
-                <div className='control'>
-                  <input className='input'
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    name={'email'}
-                  />
+                <div className="level-right">
+                 
                 </div>
-              </div>
-
-              <div className='field'>
-                <label className='labels'>Password</label>
-                <div className='control'>
-                  <input className='input'
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    name={'password'}
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="labels">Headline</label>
-                <div className="control">
-                  <textarea
-                    className="textarea"
-                    placeholder="Textarea"
-                    value={formData.headline}
-                    onChange={handleChange}
-                    name={'headline'}
-                  ></textarea>
-
-                </div>
-              </div>
-
-              <div className='field'>
-                <label className='labels'>Profile Picture</label>
-                <div className='control'>
-                  <button className="button is-danger" onClick={handleUpload}>Add a profile picture.</button>
-
-                </div>
-              </div>
-
-              <div className="control">
-                <button className="button">Register</button>
-              </div>
-            </form>
+              </nav>
+            </div>
           </div>
-        </main>
-
-
-
-
+        </section>
 
       </div>
+
+
     </section>
+
   </>
 
 

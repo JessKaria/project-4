@@ -4,9 +4,12 @@ import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
 
 
+
 const Navbar = ({ history }) => {
   const [mobNav, updateMobNav] = useState(false)
   const token = localStorage.getItem('token')
+  const loggedIn = getLoggedInUserId()
+  console.log(loggedIn)
 
 
 
@@ -14,14 +17,16 @@ const Navbar = ({ history }) => {
     localStorage.removeItem('token')
     history.push('/')
   }
-  const loggedIn = getLoggedInUserId()
 
-  return <nav className="navbar is-white is-sticky" role="navigation" aria-label="main navigation">
+
+  return <nav className="navbar is-black is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      {/* <Link className="navbar-items" to={'/'}> */}
+      <div className="navbar-item">
+        <div className="buttons">
+        <Link to="/" className="button is-white is-medium is-inverted">Home</Link>
 
-      {/* </Link> */}
-
+        </div>
+      </div>
       <a onClick={() => updateMobNav(!mobNav)} role="button" className={`navbar-burger ${mobNav ? 'is-active' : ''}`} >
         <span aria-hidden="true" />
         <span aria-hidden="true" />
@@ -29,19 +34,14 @@ const Navbar = ({ history }) => {
       </a>
     </div>
     <div id="navbarBasicExample" className={`navbar-menu ${mobNav ? 'is-active' : ''}`}>
-      <div className="navbar-start">
-        <a className="navbar-item">Home</a>
-        <a className="navbar-item">Documentation</a>
-
-      </div>
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to="/" className="button is-dark">Home</Link>
-            {!loggedIn && <Link to="/login" className="button">Login</Link>}
-            {loggedIn && <Link to="/dashboard" className="button">Dashboard</Link>}
-            {loggedIn && <Link to="/create-event" className="button">Create Event</Link>}
-            {loggedIn && <Link to="/" className="button is-danger" onClick={handleLogout} >Logout</Link>}
+            
+            {!loggedIn && <Link to="/login" className="button is-white is-medium is-inverted">Login</Link>}
+            {loggedIn && <Link to="/dashboard" className="button is-white is-medium is-inverted">Dashboard</Link>}
+            {loggedIn && <Link to="/create-event" className="button is-white is-medium is-inverted">Create Event</Link>}
+            {loggedIn && <Link to="/" className="button is-white is-medium is-inverted" onClick={handleLogout} >Logout</Link>}
 
           </div>
         </div>

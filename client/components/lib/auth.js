@@ -1,3 +1,9 @@
+
+
+
+
+
+
 export function getLoggedInUserId() {
   if (!localStorage) return false
   const token = localStorage.getItem('token')
@@ -7,7 +13,6 @@ export function getLoggedInUserId() {
   return payloadAsObject.sub
 }
 
-const logged = getLoggedInUserId()
 
 
 

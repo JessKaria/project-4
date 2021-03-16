@@ -6,7 +6,7 @@ import { getLoggedInUserId } from '../lib/auth'
 
 
 const Dashboard = ({ history }) => {
-  const [events, updateEvents] = useState({})
+  const [events, updateEvents] = useState([])
   const [profile, updateProfile] = useState({})
   const [loading, updateLoading] = useState(true)
   const token = localStorage.getItem('token')
@@ -45,6 +45,8 @@ const Dashboard = ({ history }) => {
         updateProfile(data)
       })
   }, [])
+  
+
 
 
 
@@ -58,101 +60,135 @@ const Dashboard = ({ history }) => {
 
   return <>
     <div>
-      <div className="container">
-        <div className="columns">
-          <div className="column is-3 ">
-            <aside className="menu is-hidden-mobile">
-              <div className="card">
-                <div className="card-image">
-                  <figure className="image is-4by3">
-                    <img src={profile.photo} alt="Placeholder image" />
-                  </figure>
-                </div>
-                <div className="card-content">
-                  <div className="media">
-                    <div className="media-left">
-                      <figure className="image is-48x48">
-                        <img src={profile.photo} alt="Placeholder image" />
+      <section className="hero is-black">
+        <div className="hero-body">
+          <div className="columns">
+            <div className="column is-12">
+              <div className="container content">
+                <i className="is-large fab fa-discord" />
+                <i className="is-large fas fa-code" />
+                <h1 className="title is-1 ">Welcome back {profile.fullname}.</h1>
+                <h3 className="subtitle">We now have {events.length} events live on our platform.</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <div className="columns">
+            <div className="column is-3">
+              <aside className="is-medium menu">
+                <p className="menu-label">YOUR DASHBOARD</p>
+                <ul className="menu-list">
+                  <li className="is-right"></li>
+
+                  <div className="card">
+                    <div className="card-image">
+                      <figure className="image is-4by3">
+                        <img src={profile.photo} alt={profile.fullname} />
                       </figure>
                     </div>
-                    <div className="media-content">
-                      <p className="title is-4">{profile.fullname}</p>
-                      <p className="subtitle is-6">@{profile.username}</p>
+                    <div className="card-content">
+                      <div className="media">
+                        <div className="media-left">
+                          <figure className="image is-48x48">
+                            <img src={profile.photo} alt={profile.fullname} />
+                          </figure>
+                        </div>
+                        <div className="media-content">
+                          <p className="title is-4">{profile.fullname}</p>
+                          <p className="subtitle is-6">@{profile.username}</p>
+                        </div>
+                      </div>
+                      <div className="content">
+                        {profile.headline} 
+                        <br />
+                      </div>
                     </div>
                   </div>
-                  <div className="content">{profile.headline}
-                    <br />
-                  </div>
-                </div>
-              </div>
-            </aside>
-          </div>
-          <div className="column is-9">
-            <section className="hero is-info welcome is-small">
-              <div className="hero-body">
-                <div className="container">
-                  <h1 className="title">
-                    Hello, {profile.username}!.</h1>
-                  <h2 className="subtitle">I hope you are having a great day!</h2>
-                </div>
-              </div>
-            </section>
-            <section className="info-tiles">
-              <div className="tile is-ancestor has-text-centered">
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">{inbox.length}</p>
-                    <p className="subtitle">Messages Sent</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">{events.length}</p>
-                    <p className="subtitle">Live Events</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">3.4k</p>
-                    <p className="subtitle">Open Orders</p>
-                  </article>
-                </div>
-                <div className="tile is-parent">
-                  <article className="tile is-child box">
-                    <p className="title">19</p>
-                    <p className="subtitle">Exceptions</p>
-                  </article>
-                </div>
-              </div>
-            </section>
 
-            <div className="container">
-              {events.map((event) => {
-                return <div key={event.id}>
-                  <Link key={event.id} to={{
-                    pathname: `/message/${event.id}`,
-                    state: {
-                      name: event.name
-                    }
-                  }}>
-                    <article className="columns is-multiline">
-                      <div className="column is-12 post-img">
-                        <img src={event.image} alt="Featured Image" />
-                      </div>
-                      <div className="column is-12 featured-content ">
-                        <h3 className="heading post-category">{event.date} | {event.start_time} | {event.duration}</h3>
-                        <h1 className="title post-title">{event.name}</h1>
-                        <p className="post-excerpt">{event.description}</p>
-                        <br />
-                        <button className="button is-dark">Find Out More</button>
-                      </div>
-                    </article>
-                  </Link>
-                </div>
-              })}
+
+
+
+
+
+
+
+
+
+                </ul>
+                <p className="menu-label">
+                  FILTER EVENTS BY
+                  </p>
+                <ul className="menu-list">
+                  <li><span className="tag is-white is-medium">Lorem</span></li>
+                  <li><span className="tag is-white is-medium">Ipsum</span></li>
+                  <li><span className="tag is-white is-medium">Dolor</span></li>
+                  <li><span className="tag is-white is-medium">Animi</span></li>
+                  <li><span className="tag is-white is-medium">Eximi</span></li>
+                  <li><span className="tag is-white is-medium">Nullius</span></li>
+                  <li><span className="tag is-white is-medium">Oxipi</span></li>
+                  <li><span className="tag is-white is-medium">Vultus</span></li>
+                  <li><span className="tag is-white is-medium">Voluptatis</span></li>
+                  <li><span className="tag is-white is-medium">Exomarphis</span></li>
+                  <li><span className="tag is-white is-medium">Finimi</span></li>
+                  <li><span className="tag is-white is-medium">Aenigma</span></li>
+                  <li><span className="tag is-white is-medium">Arkham</span></li>
+                  <li><span className="tag is-white is-medium">Blue</span></li>
+                  <li><span className="tag is-white is-medium">Medium</span></li>
+                </ul>
+              </aside>
             </div>
 
 
+            <div className="column is-9">
+              <div className="content is-medium">
+                <div className="container">
+                  {events.map((event) => {
+                    return <div key={event.id}>
+                      <Link key={event.id} to={{
+                        pathname: `message/${event.id}`,
+                        state: {
+                          name: event.name
+                        }
+                      }}>
+                        <article className="columns is-multiline">
+                          <div className="column is-12 post-img">
+                            <img src={event.image} alt={event.name} />
+                          </div>
+                          <div className="column is-12">
+                            <p className="heading post-category">{event.date} | {event.start_time} | {event.duration}</p>
+                            <h2 className="title post-title">{event.name}</h2>
+                            <article className="media">
+
+                              <div className="media-right">
+
+                              </div>
+                            </article>
+                            <p>{event.description}</p>
+                            <button className="button is-dark">Find Out More</button>
+                          </div>
+                          <article className="media">
+
+
+                            <div className="media-right">
+                              <div></div>
+                              
+                            </div>
+                          </article>
+
+                        </article>
+                      </Link>
+                    </div>
+                  })}
+                </div>
+              </div>
+
+
+
+
+            </div>
 
 
 
@@ -160,16 +196,9 @@ const Dashboard = ({ history }) => {
 
           </div>
         </div>
-      </div>
+      </section>
     </div>
 
-
-
-
-
-
   </>
-
-
 }
 export default withRouter(Dashboard)

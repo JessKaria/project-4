@@ -188,7 +188,7 @@ const CreateEvent = ({ history }) => {
 
                       <div className="field">
                         <div className="control">
-                          <button className="button is-block is-danger is-fullwidth is-medium" onClick={handleUpload}>Add a profile picture.</button>
+                          <button className="button is-block is-danger is-fullwidth is-medium" onClick={handleUpload}>Upload a photo!</button>
                         </div>
                       </div>
 
