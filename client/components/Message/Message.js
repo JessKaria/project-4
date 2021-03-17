@@ -106,6 +106,19 @@ const Message = ({ match, history }) => {
 
   if (profile.length === 0) {
     return <>
+      <section className="hero is-black">
+        <div className="hero-body">
+          <div className="columns">
+            <div className="column is-12">
+              <div className="container content">
+                <i className="is-large fab fa-discord" />
+                <i className="is-large fas fa-code" />
+                <h1 className="title is-1 ">This event is hosted by {user.username}.</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <div>
 
         <section className="hero is-small">
@@ -132,15 +145,45 @@ const Message = ({ match, history }) => {
                             <p className="post-excerpt">{event.description}</p>
                             <br />
 
-                            <br />
-                            <small>
-                              <strong>Duration: </strong>{event.duration} <br />
-                              <strong>Average attendee age: </strong>{event.target_age} <br />
-                              <strong>Expected attendees:</strong> {event.expected_attendees} <br />
-                              <strong>Start Time: </strong>{event.start_time} <br />
-                            </small>
-                            <br />
-                            <button className="button is-primary" onClick={handleConvo}  > Create a chat</button>
+                            <article className="media">
+                              <figure className="media-left">
+                                <p className="image is-96x96">
+                                  <img className="small-picture" src={user.photo} />
+                                </p>
+                              </figure>
+                              <div className="media-content">
+                                <div className="content">
+                                  <small>
+                                    <strong>Host: </strong>{user.username} <br />
+                                    <strong>Duration: </strong>{event.duration} <br />
+                                    <strong>Average attendee age: </strong>{event.target_age} <br />
+                                    <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                                    <strong>Start Time: </strong>{event.start_time} <br />
+                                  </small>
+
+
+
+                                </div>
+                                <nav className="level is-mobile">
+                                  <div className="level-left">
+                                    <a className="level-item">
+                                      <span className="icon is-small"><i className="fas fa-reply" /></span>
+                                    </a>
+                                    <a className="level-item">
+                                      <span className="icon is-small"><i className="fas fa-retweet" /></span>
+                                    </a>
+                                    <a className="level-item">
+                                      <span className="icon is-small"><i className="fas fa-heart" /></span>
+                                    </a>
+                                  </div>
+                                </nav>
+                              </div>
+                              <div className="media-right">
+                              </div>
+                            </article>
+
+
+                            <button className="button is-white is-medium is-inverted" onClick={handleConvo}  > Create a chat</button>
                           </div>
                         </div>
                       </article>
@@ -152,41 +195,8 @@ const Message = ({ match, history }) => {
 
 
                     <div className="columns">
+
                       <div className="column">
-                        <article className="media">
-                          <figure className="media-left">
-                            <p className="image is-120x120">
-                              <img className="small-picture" src={user.photo} width={5} />
-                            </p>
-                          </figure>
-                          <div className="media-content">
-                            <div className="content">
-                              <p>
-                                <strong>Hosted by: <br />
-                                  {user.fullname} </strong>
-                                <small>@{user.username}</small>
-                                <br />{user.headline}</p>
-                              <br />
-
-                            </div>
-                            <nav className="level is-mobile">
-                              <div className="level-left">
-                                <a className="level-item">
-                                  <span className="icon is-small"><i className="fas fa-reply" /></span>
-                                </a>
-                                <a className="level-item">
-                                  <span className="icon is-small"><i className="fas fa-retweet" /></span>
-                                </a>
-                                <a className="level-item">
-                                  <span className="icon is-small"><i className="fas fa-heart" /></span>
-                                </a>
-                              </div>
-                            </nav>
-                          </div>
-                          <div className="media-right">
-                          </div>
-                        </article>
-
 
                       </div>
                       <div className="column">
@@ -219,7 +229,7 @@ const Message = ({ match, history }) => {
                             <div className="control">
                             </div>
                           </div>
-                          <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
+                          <button onSubmit={handleSubmit} className="button is-fullwidth is-white is-medium is-inverted">Send a message!</button>
                           <br />
                           <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
                         </form>
@@ -244,6 +254,19 @@ const Message = ({ match, history }) => {
   //! yes there is previous history - return all messages in that conversation
 
   return <>
+    <section className="hero is-black">
+      <div className="hero-body">
+        <div className="columns">
+          <div className="column is-12">
+            <div className="container content">
+              <i className="is-large fab fa-discord" />
+              <i className="is-large fas fa-code" />
+              <h1 className="title is-1 ">This event is hosted by {user.username}.</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div>
       <section className="hero is-small">
         <div className="hero-body">
@@ -268,17 +291,46 @@ const Message = ({ match, history }) => {
                           <h1 className="title post-title">{event.name}</h1>
                           <p className="post-excerpt">{event.description}</p>
                           <br />
+                          <br />
 
-                          {/* <Inbox chat={[chat]}/> */}
-                          <br />
-                          <small>
-                            <strong>Duration: </strong>{event.duration} <br />
-                            <strong>Average attendee age: </strong>{event.target_age} <br />
-                            <strong>Expected attendees:</strong> {event.expected_attendees} <br />
-                            <strong>Start Time: </strong>{event.start_time} <br />
-                          </small>
-                          <br />
-                          <button onClick={getMessages} className="button is-primary">Check previous messages</button>
+                          <article className="media">
+                            <figure className="media-left">
+                              <p className="image is-96x96">
+                                <img className="small-picture" src={user.photo} />
+                              </p>
+                            </figure>
+                            <div className="media-content">
+                              <div className="content">
+                                <small>
+                                  <strong>Host: </strong>{user.username} <br />
+                                  <strong>Duration: </strong>{event.duration} <br />
+                                  <strong>Average attendee age: </strong>{event.target_age} <br />
+                                  <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                                  <strong>Start Time: </strong>{event.start_time} <br />
+                                </small>
+
+
+
+                              </div>
+                              <nav className="level is-mobile">
+                                <div className="level-left">
+                                  <a className="level-item">
+                                    <span className="icon is-small"><i className="fas fa-reply" /></span>
+                                  </a>
+                                  <a className="level-item">
+                                    <span className="icon is-small"><i className="fas fa-retweet" /></span>
+                                  </a>
+                                  <a className="level-item">
+                                    <span className="icon is-small"><i className="fas fa-heart" /></span>
+                                  </a>
+                                </div>
+                              </nav>
+                            </div>
+                            <div className="media-right">
+                            </div>
+                          </article>
+
+                          <button onClick={getMessages} className="button is-white is-medium is-inverted">Check previous messages</button>
                         </div>
                       </div>
                     </article>
@@ -288,46 +340,28 @@ const Message = ({ match, history }) => {
                 <div className="column">
                   <div className="column">
 
+
                   </div>
 
 
                   <div className="columns">
                     <div className="column">
-                      <article className="media">
-                        <figure className="media-left">
-                          <p className="image is-120x120">
-                            <img className="small-picture" src={user.photo} width={5} />
-                          </p>
-                        </figure>
-                        <div className="media-content">
-                          <div className="content">
-                            <p>
-                              <strong>Hosted by: <br />
-                                {user.fullname} </strong>
-                              <small>@{user.username}</small>
-                              <br />{user.headline}</p>
-                            <br />
+                      {chat.map((cha) => {
+                        return <div key={cha.id}>
 
-
-
-                          </div>
-                          <nav className="level is-mobile">
-                            <div className="level-left">
-                              <a className="level-item">
-                                <span className="icon is-small"><i className="fas fa-reply" /></span>
-                              </a>
-                              <a className="level-item">
-                                <span className="icon is-small"><i className="fas fa-retweet" /></span>
-                              </a>
-                              <a className="level-item">
-                                <span className="icon is-small"><i className="fas fa-heart" /></span>
-                              </a>
+                          <article className="message">
+                            <div className="message-header">
+                              <p>{cha.subject}</p>
+                              <button className="delete" aria-label="delete" />
                             </div>
-                          </nav>
+                            <div className="message-body">{cha.message}</div>
+                          </article>
+
+
+
                         </div>
-                        <div className="media-right">
-                        </div>
-                      </article>
+                      })}
+
 
 
                     </div>
@@ -361,23 +395,9 @@ const Message = ({ match, history }) => {
                           <div className="control">
                           </div>
                         </div>
-                        <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
+                        <button onSubmit={handleSubmit} className="button is-block is-fullwidth is-white is-medium is-inverted">Send a message!</button>
                         <br />
-                        {chat.map((cha) => {
-                          return <div key={cha.id}>
 
-                            <article className="message">
-                              <div className="message-header">
-                                <p>{cha.subject}</p>
-                                <button className="delete" aria-label="delete" />
-                              </div>
-                              <div className="message-body">{cha.message}</div>
-                            </article>
-
-
-
-                          </div>
-                        })}
                       </form>
                     </div>
 

@@ -22,43 +22,21 @@ const Home = ({ history }) => (
         <div className="container">
           <div className="columns">
             <div className="column is-6 is-offset-6">
-              <h1 className="title is-1 ">Lorem Ipsum</h1>
-              <hr className="content-divider" />
-              <h2 className="subtitle">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit explicabo amet magni illum eum voluptate! Eveniet voluptatem nam magnam necessitatibus.</h2>
-              <a href="#" className="button is-white is-inverted">Next <i className="fad fa-chevron-right" /></a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="parallax-2" className="hero is-large ">
+    <section className="hero is-medium">
       <div className="hero-body">
         <div className="container">
-          <div className="columns">
-            <div className="column is-6">
-              <h1 className="title is-1 ">Dolor Sit</h1>
-              <hr className="content-divider" />
-              <h2 className="subtitle">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque veritatis sequi natus minima distinctio ullam deleniti quasi quisquam autem deserunt.</h2>
-              <a href="#" className="button is-white is-inverted">Next <i className="fad fa-chevron-right" /></a>
-            </div>
-          </div>
+          <h1 className="title is-1 ">Join the club</h1>
+          <h2 className="subtitle">Created on the General Assembly SEI Immersive Course</h2>
+          <Link to="/register" className="button is-white is-medium is-inverted">Sign Up</Link>
         </div>
       </div>
     </section>
-    <section id="parallax-3" className="hero is-large ">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns">
-            <div className="column is-6 is-offset-6">
-              <h1 className="title is-1 ">Amet Consectetur</h1>
-              <hr className="content-divider" />
-              <h2 className="subtitle">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure minus nam necessitatibus neque in perferendis eveniet dolorum assumenda dolores accusamus.</h2>
-              <a href="#" className="button is-white is-inverted">Next <i className="fad fa-chevron-right" /></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
   
   </>
 
