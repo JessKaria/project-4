@@ -142,7 +142,7 @@ const Dashboard = ({ history }) => {
 
             <div className="column is-9">
               <div className="content is-medium">
-                <div className="container">
+                <div className="container-scroll">
                   {events.map((event) => {
                     return <div key={event.id}>
                       <Link key={event.id} to={{
