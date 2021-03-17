@@ -45,7 +45,7 @@ const Dashboard = ({ history }) => {
         updateProfile(data)
       })
   }, [])
-  
+
 
 
 
@@ -102,7 +102,7 @@ const Dashboard = ({ history }) => {
                         </div>
                       </div>
                       <div className="content">
-                        {profile.headline} 
+                        {profile.headline}
                         <br />
                       </div>
                     </div>
@@ -121,6 +121,7 @@ const Dashboard = ({ history }) => {
                 <p className="menu-label">
                   FILTER EVENTS BY
                   </p>
+
                 <ul className="menu-list">
                   <li><span className="tag is-white is-medium">Business</span></li>
                   <li><span className="tag is-white is-medium">Food</span></li>
@@ -172,9 +173,9 @@ const Dashboard = ({ history }) => {
 
                             <div className="media-right">
                               <div>
-                              
+
                               </div>
-                              
+
                             </div>
                           </article>
 
