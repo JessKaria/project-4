@@ -17,8 +17,7 @@ const Message = ({ match, history }) => {
   const token = localStorage.getItem('token')
   const id = match.params.id
 
-  const chatHistory = chat
-  console.log(chatHistory)
+  console.log(newConvo)
 
   const [formData, updateFormData] = useState({
     subject: '',
@@ -70,6 +69,20 @@ const Message = ({ match, history }) => {
     history.push('/dashboard')
   }
 
+
+  async function handleSub() {
+    // event.preventDefault()
+    console.log(token)
+    try {
+      const { data } = await axios.post(`/api/send-message/${newConvo.id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    } catch (err) {
+      console.log(err.response.data)
+    }
+    history.push('/dashboard')
+  }
+
   async function handleConvo(event) {
     event.preventDefault()
     try {
@@ -77,12 +90,14 @@ const Message = ({ match, history }) => {
         headers: { Authorization: `Bearer ${token}` }
       })
       updateNewConvo(data.id)
-      console.log(data)
+      console.log(data.id)
       updateCreateChat(!createChat)
     } catch (err) {
       console.log(err.response.data)
     }
   }
+
+  console
 
   async function getMessages(event) {
     event.preventDefault()
@@ -99,7 +114,7 @@ const Message = ({ match, history }) => {
 
   }
 
-  console.log(chat)
+
 
 
   //! no previous history create convo
@@ -183,7 +198,7 @@ const Message = ({ match, history }) => {
                             </article>
 
 
-                            <button className="button is-white is-medium is-inverted" onClick={handleConvo}  > Create a chat</button>
+                            <button className="button is-white is-medium is-inverted" onClick={handleConvo}> Create a chat</button>
                           </div>
                         </div>
                       </article>
@@ -330,7 +345,7 @@ const Message = ({ match, history }) => {
                             </div>
                           </article>
 
-                          <button onClick={getMessages} className="button is-white is-medium is-inverted">Check previous messages</button>
+                          <button onClick={getMessages} className="button is-white is-medium is-inverted">Check messages.</button>
                         </div>
                       </div>
                     </article>
