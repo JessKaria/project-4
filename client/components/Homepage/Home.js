@@ -12,7 +12,7 @@ const Home = ({ history }) => (
       <div className="hero-body">
         <div className="container">
           <h1 className="title is-1 ">huddle.</h1>
-          <h2 className="subtitle">A simple boilerplate for setting up parallax <br /> using the Bulma Hero container.</h2>
+          <h2 className="subtitle">Discover the most illustrious events<br /> in the observable universe.</h2>
           <Link to="/register" className="button is-white is-medium is-inverted">Sign Up</Link>
         </div>
       </div>

@@ -25,7 +25,6 @@ const App = () => (
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/create-event" component={CreateEvent} />
       <Route path="/message/:id" component={Message} />
-      <Route exact path="/test/backend" component={TestBackend} />
     </Switch>
     <Footer />
   </BrowserRouter>
@@ -33,18 +32,6 @@ const App = () => (
 
 
 
-// ! Just a little component to test that you can talk to your flask server, check if it
-// ! works in network tab.
-const TestBackend = () => {
-  useEffect(() => {
-    // ? This is going to try localhost:5000/api
-    axios.get('/api/event')
-      .then(({ data }) => console.log(data))
-  }, [])
 
-  return <p>
-    Hello World
-  </p>
-}
 
 export default App

@@ -122,21 +122,19 @@ const Dashboard = ({ history }) => {
                   FILTER EVENTS BY
                   </p>
                 <ul className="menu-list">
-                  <li><span className="tag is-white is-medium">Lorem</span></li>
-                  <li><span className="tag is-white is-medium">Ipsum</span></li>
-                  <li><span className="tag is-white is-medium">Dolor</span></li>
-                  <li><span className="tag is-white is-medium">Animi</span></li>
-                  <li><span className="tag is-white is-medium">Eximi</span></li>
-                  <li><span className="tag is-white is-medium">Nullius</span></li>
-                  <li><span className="tag is-white is-medium">Oxipi</span></li>
-                  <li><span className="tag is-white is-medium">Vultus</span></li>
-                  <li><span className="tag is-white is-medium">Voluptatis</span></li>
-                  <li><span className="tag is-white is-medium">Exomarphis</span></li>
-                  <li><span className="tag is-white is-medium">Finimi</span></li>
-                  <li><span className="tag is-white is-medium">Aenigma</span></li>
-                  <li><span className="tag is-white is-medium">Arkham</span></li>
-                  <li><span className="tag is-white is-medium">Blue</span></li>
-                  <li><span className="tag is-white is-medium">Medium</span></li>
+                  <li><span className="tag is-white is-medium">Business</span></li>
+                  <li><span className="tag is-white is-medium">Food</span></li>
+                  <li><span className="tag is-white is-medium">Health</span></li>
+                  <li><span className="tag is-white is-medium">Music</span></li>
+                  <li><span className="tag is-white is-medium">Charity</span></li>
+                  <li><span className="tag is-white is-medium">Community</span></li>
+                  <li><span className="tag is-white is-medium">Fashion</span></li>
+                  <li><span className="tag is-white is-medium">Film</span></li>
+                  <li><span className="tag is-white is-medium">Hobbies</span></li>
+                  <li><span className="tag is-white is-medium">Film</span></li>
+                  <li><span className="tag is-white is-medium">Hobbies</span></li>
+                  <li><span className="tag is-white is-medium">Government</span></li>
+                  <li><span className="tag is-white is-medium">Science</span></li>
                 </ul>
               </aside>
             </div>
@@ -173,7 +171,9 @@ const Dashboard = ({ history }) => {
 
 
                             <div className="media-right">
-                              <div></div>
+                              <div>
+                              
+                              </div>
                               
                             </div>
                           </article>
