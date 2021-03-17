@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
+import Inbox from './Inbox'
 
 
 const Message = ({ match, history }) => {
@@ -98,6 +99,7 @@ const Message = ({ match, history }) => {
 
   }
 
+  console.log(chat)
 
 
   //! no previous history create convo
@@ -105,6 +107,7 @@ const Message = ({ match, history }) => {
   if (profile.length === 0) {
     return <>
       <div>
+
         <section className="hero is-small">
           <div className="hero-body">
             <div className="container">
@@ -127,6 +130,15 @@ const Message = ({ match, history }) => {
                             <h3 className="heading post-category">{event.date}</h3>
                             <h1 className="title post-title">{event.name}</h1>
                             <p className="post-excerpt">{event.description}</p>
+                            <br />
+
+                            <br />
+                            <small>
+                              <strong>Duration: </strong>{event.duration} <br />
+                              <strong>Average attendee age: </strong>{event.target_age} <br />
+                              <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                              <strong>Start Time: </strong>{event.start_time} <br />
+                            </small>
                             <br />
                             <button className="button is-primary" onClick={handleConvo}  > Create a chat</button>
                           </div>
@@ -155,12 +167,7 @@ const Message = ({ match, history }) => {
                                 <small>@{user.username}</small>
                                 <br />{user.headline}</p>
                               <br />
-                              <small>
-                                <strong>Duration: </strong>{event.duration} <br />
-                                <strong>Average attendee age: </strong>{event.target_age} <br />
-                                <strong>Expected attendees:</strong> {event.expected_attendees} <br />
-                                <strong>Start Time: </strong>{event.start_time} <br />
-                              </small>
+
                             </div>
                             <nav className="level is-mobile">
                               <div className="level-left">
@@ -261,12 +268,17 @@ const Message = ({ match, history }) => {
                           <h1 className="title post-title">{event.name}</h1>
                           <p className="post-excerpt">{event.description}</p>
                           <br />
-                          <a onClick={getMessages} className="button is-primary">Check previous messages</a>
 
-                          <div>
-
-                          </div>
-                        
+                          {/* <Inbox chat={[chat]}/> */}
+                          <br />
+                          <small>
+                            <strong>Duration: </strong>{event.duration} <br />
+                            <strong>Average attendee age: </strong>{event.target_age} <br />
+                            <strong>Expected attendees:</strong> {event.expected_attendees} <br />
+                            <strong>Start Time: </strong>{event.start_time} <br />
+                          </small>
+                          <br />
+                          <button onClick={getMessages} className="button is-primary">Check previous messages</button>
                         </div>
                       </div>
                     </article>
@@ -295,12 +307,9 @@ const Message = ({ match, history }) => {
                               <small>@{user.username}</small>
                               <br />{user.headline}</p>
                             <br />
-                            <small>
-                              <strong>Duration: </strong>{event.duration} <br />
-                              <strong>Average attendee age: </strong>{event.target_age} <br />
-                              <strong>Expected attendees:</strong> {event.expected_attendees} <br />
-                              <strong>Start Time: </strong>{event.start_time} <br />
-                            </small>
+
+
+
                           </div>
                           <nav className="level is-mobile">
                             <div className="level-left">
@@ -354,7 +363,21 @@ const Message = ({ match, history }) => {
                         </div>
                         <button onSubmit={handleSubmit} className="button is-block is-primary is-fullwidth is-medium">Send a message!</button>
                         <br />
-                        <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
+                        {chat.map((cha) => {
+                          return <div key={cha.id}>
+
+                            <article className="message">
+                              <div className="message-header">
+                                <p>{cha.subject}</p>
+                                <button className="delete" aria-label="delete" />
+                              </div>
+                              <div className="message-body">{cha.message}</div>
+                            </article>
+
+
+
+                          </div>
+                        })}
                       </form>
                     </div>
 
