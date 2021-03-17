@@ -17,7 +17,7 @@ const Message = ({ match, history }) => {
   const token = localStorage.getItem('token')
   const id = match.params.id
 
-  console.log(newConvo)
+  console.log(chat)
 
   const [formData, updateFormData] = useState({
     subject: '',
@@ -61,20 +61,6 @@ const Message = ({ match, history }) => {
     console.log(token)
     try {
       const { data } = await axios.post(`/api/send-message/${convo.id}`, formData, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-    } catch (err) {
-      console.log(err.response.data)
-    }
-    history.push('/dashboard')
-  }
-
-
-  async function handleSub() {
-    // event.preventDefault()
-    console.log(token)
-    try {
-      const { data } = await axios.post(`/api/send-message/${newConvo.id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       })
     } catch (err) {
@@ -366,10 +352,27 @@ const Message = ({ match, history }) => {
 
                           <article className="message">
                             <div className="message-header">
-                              <p>{cha.subject}</p>
-                              <button className="delete" aria-label="delete" />
+                              <article className="media">
+                                <figure className="media-left">
+                                  <p className="image is-64x64">
+                                    <img src={cha.user.photo} />
+                                  </p>
+                                </figure>
+                                <div className="media-content">
+                                  <div className="content">
+                                    <p>
+                                      <strong>@{cha.user.fullname}</strong> <br />
+                                      <small>{cha.user.username}</small>
+                                      <br /></p>
+                                  </div>
+                                </div>
+                                <div className="media-right">
+                                </div>
+                              </article>
                             </div>
-                            <div className="message-body">{cha.message}</div>
+                            <div className="message-body">
+                              <strong>{cha.subject}</strong><br />
+                              {cha.message}</div>
                           </article>
 
 

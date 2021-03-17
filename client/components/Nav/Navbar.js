@@ -9,7 +9,6 @@ const Navbar = ({ history }) => {
   const [mobNav, updateMobNav] = useState(false)
   const token = localStorage.getItem('token')
   const loggedIn = getLoggedInUserId()
-  console.log(loggedIn)
 
 
 
