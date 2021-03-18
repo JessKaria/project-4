@@ -50,8 +50,8 @@ list_users = [
         photo='https://res.cloudinary.com/stressipes/image/upload/v1615936085/7_tjz4qp.png',
         ),
     User(
-        fullname='Gloria',
-        username = 'Dog lover!', 
+        fullname='Jermain',
+        username = '@MeMeLord229!', 
         email='test6@test.com', 
         password='test',
         headline='Dogs!',
@@ -66,11 +66,11 @@ list_users = [
         photo='https://res.cloudinary.com/stressipes/image/upload/v1615936085/8_dfuuor.png',
         ),
     User(
-        fullname='jess11',
+        fullname='T-Money',
         username = 'Jess11', 
         email='jess11@jess.com', 
         password='jess',
-        headline='This is the best website ever!',
+        headline='I love cheese',
         photo='https://res.cloudinary.com/stressipes/image/upload/v1615936084/4_xnrsxi.png',
         ),
     User(

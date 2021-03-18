@@ -31,13 +31,12 @@ const Home = ({ history }) => (
       <div className="hero-body">
         <div className="container">
           <h1 className="title is-1 ">Join the club</h1>
-          <h2 className="subtitle">Created on the General Assembly SEI Immersive Course</h2>
+          <h2 className="subtitle"  >This app was created by Jess Karia during the General Assembly SEI Immersive Course</h2>
           <Link to="/register" className="button is-white is-medium is-inverted">Sign Up</Link>
         </div>
       </div>
     </section>
 
-  
   </>
 
 

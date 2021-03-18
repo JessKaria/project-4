@@ -41,7 +41,7 @@ list_events = [
         image="https://images.unsplash.com/photo-1605285932053-cc78dc5a1af9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80", 
         user_id=2),
     Event(
-        name="Dinner and Dancing", 
+        name="Shaggy Live in Concert", 
         date="20th June", 
         start_time="2pm", 
         duration="1 day", 
@@ -221,7 +221,7 @@ list_events = [
         user_id=9),
     
     Event(
-        name="Jermaine Dupree in Convert!", 
+        name="Jermaine Dupree in Concert!", 
         date="20th June", 
         start_time="2pm", 
         duration="1 day", 
@@ -232,7 +232,7 @@ list_events = [
         user_id=9),
 
         Event(
-        name="Twista in Convert", 
+        name="Twista in Concert", 
         date="20th June", 
         start_time="2pm", 
         duration="1 day", 
