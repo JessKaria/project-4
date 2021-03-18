@@ -20,7 +20,7 @@ list_categories = [
 
 list_events = [
     Event(
-        name="Huddle Launch Party!!", 
+        name="Tupac Live at the Apollo!!", 
         date="21st June", 
         start_time="2pm", 
         duration="1 day", 
@@ -28,10 +28,10 @@ list_events = [
         target_age="30", 
         expected_attendees="200", 
         image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
-        user_id=1, 
+        user_id=2, 
         category=list_categories),
     Event(
-        name="Usher Live in Concert", 
+        name="Beyonce Live in Concert", 
         date="21st June", 
         start_time="2pm", 
         duration="1 day", 
@@ -240,7 +240,7 @@ list_events = [
         target_age="30", 
         expected_attendees="40,000", 
         image="https://images.unsplash.com/photo-1541407739387-485eb7a0351e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80", 
-        user_id=9),
+        user_id=1),
 
 
 ]

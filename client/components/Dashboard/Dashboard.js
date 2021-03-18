@@ -10,11 +10,9 @@ const Dashboard = ({ history }) => {
   const [profile, updateProfile] = useState({})
   const [loading, updateLoading] = useState(true)
   const token = localStorage.getItem('token')
+  const [users, updateUsers] = useState([])
   const [inbox, updateInbox] = useState({})
   const user = getLoggedInUserId()
-  console.log(events)
-
-
 
 
   useEffect(() => {
@@ -36,6 +34,17 @@ const Dashboard = ({ history }) => {
       })
   }, [])
 
+  useEffect(() => {
+    axios.get('/api/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(({ data }) => {
+        updateUsers(data)
+      })
+  }, [])
+
+
+  console.log(users)
 
   useEffect(() => {
     axios.get('/api/profile', {
@@ -48,14 +57,9 @@ const Dashboard = ({ history }) => {
 
 
 
-
-
-
-
   if (loading) {
     return <h1 className="subtitle">Loading...</h1>
   }
-
 
 
   return <>
@@ -119,24 +123,48 @@ const Dashboard = ({ history }) => {
 
                 </ul>
                 <p className="menu-label">
-                  FILTER EVENTS BY
-                  </p>
-
-                <ul className="menu-list">
-                  <li><span className="tag is-white is-medium">Business</span></li>
-                  <li><span className="tag is-white is-medium">Food</span></li>
-                  <li><span className="tag is-white is-medium">Health</span></li>
-                  <li><span className="tag is-white is-medium">Music</span></li>
-                  <li><span className="tag is-white is-medium">Charity</span></li>
-                  <li><span className="tag is-white is-medium">Community</span></li>
-                  <li><span className="tag is-white is-medium">Fashion</span></li>
-                  <li><span className="tag is-white is-medium">Film</span></li>
-                  <li><span className="tag is-white is-medium">Hobbies</span></li>
-                  <li><span className="tag is-white is-medium">Film</span></li>
-                  <li><span className="tag is-white is-medium">Hobbies</span></li>
-                  <li><span className="tag is-white is-medium">Government</span></li>
-                  <li><span className="tag is-white is-medium">Science</span></li>
+                  HUDDLE IN HIGHLIGHTS</p>
+                  <ul className="menu-list">
+                  <li><span className="tag is-white is-medium">{events.length} EVENTS ADDED</span></li>
+                  <li><span className="tag is-white is-medium">{users.length} USERS REGISTERED </span></li>
+                  <li><span className="tag is-white is-medium">{inbox.length} MESSAGES SENT</span></li>
                 </ul>
+                {events.map((event) => {
+                  return <div key={event.id}>
+                    <article className="media">
+                      <figure className="media-left">
+                        <p className="image is-96x96">
+                          <img className="small-picture" src={event.user.photo} />
+                        </p>
+                      </figure>
+                      <div className="media-content">
+                        <div className="content">
+                          <small><br />
+                            <strong>{event.user.username}</strong> <br />
+                            <strong>{event.user.headline}</strong> <br />
+                          </small>
+                        </div>
+                        <nav className="level is-mobile">
+                          <div className="level-left">
+                            <a className="level-item">
+                              <span className="icon is-small"><i className="fas fa-reply" /></span>
+                            </a>
+                            <a className="level-item">
+                              <span className="icon is-small"><i className="fas fa-retweet" /></span>
+                            </a>
+                            <a className="level-item">
+                              <span className="icon is-small"><i className="fas fa-heart" /></span>
+                            </a>
+                          </div>
+                        </nav>
+                      </div>
+                      <div className="media-right">
+                      </div>
+                    </article>
+                  </div>
+                })}
+
+
               </aside>
             </div>
 
@@ -162,7 +190,6 @@ const Dashboard = ({ history }) => {
                             <article className="media">
 
                               <div className="media-right">
-
                               </div>
                             </article>
                             <p>{event.description}</p>

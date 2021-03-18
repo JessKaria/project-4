@@ -309,9 +309,6 @@ const Message = ({ match, history }) => {
                                   <strong>Expected attendees:</strong> {event.expected_attendees} <br />
                                   <strong>Start Time: </strong>{event.start_time} <br />
                                 </small>
-
-
-
                               </div>
                               <nav className="level is-mobile">
                                 <div className="level-left">
@@ -371,8 +368,8 @@ const Message = ({ match, history }) => {
                               </article>
                             </div>
                             <div className="message-body">
-                              <strong>{cha.subject}</strong><br />
-                              {cha.message}</div>
+                              <strong>Subject: {cha.subject}</strong><br />
+                              Message: {cha.message}</div>
                           </article>
 
 

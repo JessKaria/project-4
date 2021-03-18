@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
+import { Alert } from 'reactstrap'
 
 // fullname='Sam again',
 // username = 'Sammy', 
@@ -45,6 +46,7 @@ const Login = ({ history }) => {
       console.log('')
     } catch (err) {
       console.log(err.response.data.message)
+      alert(err.response.data.message)
     }
   }
 
@@ -54,7 +56,7 @@ const Login = ({ history }) => {
       <div className="hero-body">
         <main className="column">
           <div className="column is-flex is-flex-direction-column is-align-items-center">
-          <h1 className="title is-1 ">huddle.</h1>
+            <h1 className="title is-1 ">huddle.</h1>
             <form className='field' onSubmit={handleSubmit} >
 
               <div className="field">
@@ -91,7 +93,7 @@ const Login = ({ history }) => {
             <nav className="level">
               <div className="level-item has-text-centered">
                 <div>
-                <Link to="/register" className="text">Creat an account</Link>
+                  <Link to="/register" className="text">Creat an account</Link>
                 </div>
               </div>
               <div className="level-item has-text-centered">
