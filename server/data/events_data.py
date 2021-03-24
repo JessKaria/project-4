@@ -89,7 +89,7 @@ list_events = [
         target_age="30", 
         expected_attendees="40,000", 
         image="https://images.unsplash.com/photo-1514605411468-81f98844a475?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80", 
-        user_id=7),
+        user_id=1),
 
 ]
 

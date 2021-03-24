@@ -57,13 +57,4 @@ list_users = [
         headline='Dogs!',
         photo='https://res.cloudinary.com/stressipes/image/upload/v1615936084/1_vn9j9u.png',
         ),
-    User(
-        fullname='Sean',
-        username = 'musicman', 
-        email='test7@test.com', 
-        password='test',
-        headline='Live, Love, Laugh!',
-        photo='https://res.cloudinary.com/stressipes/image/upload/v1615936085/8_dfuuor.png',
-        ),
-   
 ]
