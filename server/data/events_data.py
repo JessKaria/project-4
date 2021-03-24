@@ -28,7 +28,7 @@ list_events = [
         target_age="30", 
         expected_attendees="200", 
         image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
-        user_id=7, 
+        user_id=6, 
         category=list_categories),
     Event(
         name="Beyonce Live in Concert", 

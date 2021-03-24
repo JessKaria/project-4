@@ -50,7 +50,7 @@ list_users = [
         photo='https://res.cloudinary.com/stressipes/image/upload/v1615936085/7_tjz4qp.png',
         ),
     User(
-        fullname='Jermain',
+        fullname='Jermaine',
         username = '@MeMeLord229!', 
         email='test6@test.com', 
         password='test',
