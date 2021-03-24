@@ -83,7 +83,6 @@ const Message = ({ match, history }) => {
     }
   }
 
-  console
 
   async function getMessages(event) {
     event.preventDefault()
