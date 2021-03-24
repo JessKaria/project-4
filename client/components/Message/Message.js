@@ -18,6 +18,8 @@ const Message = ({ match, history }) => {
   const id = match.params.id
 
   console.log(chat)
+  console.log(convo)
+  console.log(user)
 
   const [formData, updateFormData] = useState({
     subject: '',
