@@ -93,7 +93,7 @@ const Login = ({ history }) => {
             <nav className="level">
               <div className="level-item has-text-centered">
                 <div>
-                  <Link to="/register" className="text">Creat an account</Link>
+                  <Link to="/register" className="text">Create an account</Link>
                 </div>
               </div>
               <div className="level-item has-text-centered">
