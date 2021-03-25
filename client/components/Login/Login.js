@@ -3,14 +3,6 @@ import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { Alert } from 'reactstrap'
 
-// fullname='Sam again',
-// username = 'Sammy', 
-// email='test4@test.com', 
-// password='test',
-// headline='Live!',
-// photo='',
-
-
 const Login = ({ history }) => {
 
   const [formData, updateFormData] = useState({
@@ -18,8 +10,6 @@ const Login = ({ history }) => {
     password: ''
   })
 
-  console.log(formData)
-  console.log(updateFormData)
 
   function handleChange(event) {
     const name = event.target.name
@@ -31,10 +21,6 @@ const Login = ({ history }) => {
     })
   }
 
-
-
-
-
   async function handleSubmit(event) {
     event.preventDefault()
     try {
@@ -43,7 +29,6 @@ const Login = ({ history }) => {
         localStorage.setItem('token', data.token)
       }
       history.push('/dashboard')
-      console.log('')
     } catch (err) {
       console.log(err.response.data.message)
       alert(err.response.data.message)

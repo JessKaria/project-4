@@ -2,13 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 
-// fullname='Sam again',
-// username = 'Sammy', 
-// email='test4@test.com', 
-// password='test',
-// headline='Live!',
-// photo='',
-
 
 const Register = ({ history }) => {
 
@@ -65,11 +58,11 @@ const Register = ({ history }) => {
       console.log(data)
     } catch (err) {
       console.log(err.response.data)
-
+      alert(err.response.data)
     }
-
-
   }
+
+
 
 
   return <>

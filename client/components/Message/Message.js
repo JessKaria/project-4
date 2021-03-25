@@ -33,6 +33,8 @@ const Message = ({ match, history }) => {
     })
   }
 
+  
+
   useEffect(() => {
     axios.get(`/api/check-convo/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -41,7 +43,6 @@ const Message = ({ match, history }) => {
         updateProfile(data)
         updateConvo(data[0])
       })
-
     axios.get(`/api/event/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -54,8 +55,6 @@ const Message = ({ match, history }) => {
 
 
   async function handleSubmit() {
-    // event.preventDefault()
-    console.log(token)
     try {
       const { data } = await axios.post(`/api/send-message/${convo.id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
@@ -78,6 +77,7 @@ const Message = ({ match, history }) => {
     } catch (err) {
       console.log(err.response.data)
     }
+    location.reload()
   }
 
 
@@ -93,7 +93,6 @@ const Message = ({ match, history }) => {
     } catch (err) {
       console.log(err.response.data)
     }
-
   }
 
 

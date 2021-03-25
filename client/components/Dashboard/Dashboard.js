@@ -15,6 +15,7 @@ const Dashboard = ({ history }) => {
   const user = getLoggedInUserId()
 
 
+
   useEffect(() => {
     axios.get('/api/messages', {
       headers: { Authorization: `Bearer ${token}` }
@@ -28,7 +29,6 @@ const Dashboard = ({ history }) => {
     })
       .then(({ data }) => {
         data.shift()
-        console.log(data)
         updateEvents(data)
         updateLoading(false)
       })
@@ -38,6 +38,13 @@ const Dashboard = ({ history }) => {
     })
       .then(({ data }) => {
         updateProfile(data)
+      })
+
+    axios.get('/api/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(({ data }) => {
+        updateUsers(data)
       })
 
   }, [])
