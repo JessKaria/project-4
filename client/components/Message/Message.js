@@ -13,10 +13,13 @@ const Message = ({ match, history }) => {
   const [messages, updateMessages] = useState(false)
   const [createChat, updateCreateChat] = useState(false)
   const [user, updateUser] = useState({})
+  const [comment, updateComment] = useState([])
   const [newConvo, updateNewConvo] = useState({})
   const [chat, getChat] = useState([])
   const token = localStorage.getItem('token')
   const id = match.params.id
+
+ 
 
 
   const [formData, updateFormData] = useState({
@@ -49,10 +52,12 @@ const Message = ({ match, history }) => {
       .then(({ data }) => {
         updateEvent(data)
         updateUser(data.user)
+        updateComment(data.comments)
       })
 
   }, [])
 
+  console.log(comment)
 
   async function handleSubmit() {
     try {

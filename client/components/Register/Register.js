@@ -43,7 +43,7 @@ const Register = ({ history }) => {
         }
         updateFormData({
           ...formData,
-          image: result.info.secure_url
+          photo: result.info.secure_url
         })
       }
     ).open()

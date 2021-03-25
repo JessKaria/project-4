@@ -23,7 +23,6 @@ const Dashboard = ({ history }) => {
       .then(({ data }) => {
         updateInbox(data)
       })
-
     axios.get('/api/event', {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -32,21 +31,18 @@ const Dashboard = ({ history }) => {
         updateEvents(data)
         updateLoading(false)
       })
-
     axios.get('/api/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(({ data }) => {
         updateProfile(data)
       })
-
     axios.get('/api/users', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(({ data }) => {
         updateUsers(data)
       })
-
   }, [])
 
 
