@@ -46,10 +46,4 @@ list_messages = [
 
 
 
-
-
-
-
-
-
 ]
