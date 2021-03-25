@@ -22,38 +22,26 @@ const Dashboard = ({ history }) => {
       .then(({ data }) => {
         updateInbox(data)
       })
-  }, [])
 
-  useEffect(() => {
     axios.get('/api/event', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(({ data }) => {
+        data.shift()
+        console.log(data)
         updateEvents(data)
         updateLoading(false)
       })
-  }, [])
 
-  useEffect(() => {
-    axios.get('/api/users', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(({ data }) => {
-        updateUsers(data)
-      })
-  }, [])
-
-
-  console.log(users)
-
-  useEffect(() => {
     axios.get('/api/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(({ data }) => {
         updateProfile(data)
       })
+
   }, [])
+
 
 
 
@@ -124,7 +112,7 @@ const Dashboard = ({ history }) => {
                 </ul>
                 <p className="menu-label">
                   HUDDLE IN HIGHLIGHTS</p>
-                  <ul className="menu-list">
+                <ul className="menu-list">
                   <li><span className="tag is-white is-medium">{events.length} EVENTS ADDED</span></li>
                   <li><span className="tag is-white is-medium">{users.length} USERS REGISTERED </span></li>
                   <li><span className="tag is-white is-medium">{inbox.length} MESSAGES SENT</span></li>

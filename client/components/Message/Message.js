@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
+import { isCreator } from '../lib/auth'
 import Inbox from './Inbox'
 
 
@@ -17,9 +18,6 @@ const Message = ({ match, history }) => {
   const token = localStorage.getItem('token')
   const id = match.params.id
 
-  console.log(chat)
-  console.log(convo)
-  console.log(user)
 
   const [formData, updateFormData] = useState({
     subject: '',
@@ -43,10 +41,7 @@ const Message = ({ match, history }) => {
         updateProfile(data)
         updateConvo(data[0])
       })
-  }, [])
 
-
-  useEffect(() => {
     axios.get(`/api/event/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -54,8 +49,8 @@ const Message = ({ match, history }) => {
         updateEvent(data)
         updateUser(data.user)
       })
-  }, [])
 
+  }, [])
 
 
   async function handleSubmit() {
@@ -328,6 +323,7 @@ const Message = ({ match, history }) => {
                             <div className="media-right">
                             </div>
                           </article>
+
 
                           <button onClick={getMessages} className="button is-white is-medium is-inverted">Check messages.</button>
                         </div>
