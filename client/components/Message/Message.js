@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
 import { isCreator } from '../lib/auth'
-import Inbox from './Inbox'
 
 
 const Message = ({ match, history }) => {
