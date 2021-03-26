@@ -6,19 +6,27 @@ import { isCreator } from '../lib/auth'
 
 
 const Message = ({ match, history }) => {
+  //does convo exist - if length is greater?
   const [profile, updateProfile] = useState([])
-  const [event, updateEvent] = useState({})
+
+  // get the id of the conversation
   const [convo, updateConvo] = useState({})
-  const [messages, updateMessages] = useState(false)
-  const [createChat, updateCreateChat] = useState(false)
+
+  // populate page with event and user data
+  const [event, updateEvent] = useState({})
   const [user, updateUser] = useState({})
-  const [comment, updateComment] = useState([])
-  const [newConvo, updateNewConvo] = useState({})
-  const [chat, getChat] = useState([])
+
+
   const token = localStorage.getItem('token')
   const id = match.params.id
+  
+  
+  const [messages, updateMessages] = useState(false)
+  const [createChat, updateCreateChat] = useState(false)
+  
+  const [newConvo, updateNewConvo] = useState({})
+  const [chat, getChat] = useState([])
 
- 
 
 
   const [formData, updateFormData] = useState({
@@ -51,12 +59,11 @@ const Message = ({ match, history }) => {
       .then(({ data }) => {
         updateEvent(data)
         updateUser(data.user)
-        updateComment(data.comments)
       })
 
   }, [])
 
-  console.log(comment)
+
 
   async function handleSubmit() {
     try {
@@ -182,7 +189,7 @@ const Message = ({ match, history }) => {
                               </div>
                             </article>
 
-
+     
                             <button className="button is-white is-medium is-inverted" onClick={handleConvo}> Create a chat</button>
                           </div>
                         </div>
@@ -254,6 +261,7 @@ const Message = ({ match, history }) => {
   //! yes there is previous history - return all messages in that conversation
 
   return <>
+
     <section className="hero is-black">
       <div className="hero-body">
         <div className="columns">
@@ -327,7 +335,7 @@ const Message = ({ match, history }) => {
                             </div>
                           </article>
 
-
+                          
                           <button onClick={getMessages} className="button is-white is-medium is-inverted">Check messages.</button>
                         </div>
                       </div>
