@@ -105,6 +105,7 @@ const CreateEvent = ({ history }) => {
                           value={formData.name}
                           onChange={handleChange}
                           name={'name'}
+                          required
                         />
                       </div>
                     </div>
@@ -118,6 +119,7 @@ const CreateEvent = ({ history }) => {
                           value={formData.date}
                           onChange={handleChange}
                           name={'date'}
+                          required
                         />
                       </div>
                     </div>
@@ -131,6 +133,7 @@ const CreateEvent = ({ history }) => {
                           value={formData.start_time}
                           onChange={handleChange}
                           name={'start_time'}
+                          required
                         />
                       </div>
                     </div>
@@ -144,6 +147,7 @@ const CreateEvent = ({ history }) => {
                           value={formData.duration}
                           onChange={handleChange}
                           name={'duration'}
+                          required
                         />
                       </div>
                     </div>
@@ -157,6 +161,7 @@ const CreateEvent = ({ history }) => {
                           value={formData.description}
                           onChange={handleChange}
                           name={'description'}
+                          required
                         />
                       </div>
                     </div>
@@ -165,11 +170,12 @@ const CreateEvent = ({ history }) => {
                       <div className="control">
                         <input
                           className="input is-medium"
-                          type="text"
+                          type="number"
                           placeholder="Attendee age profile"
                           value={formData.target_age}
                           onChange={handleChange}
                           name={'target_age'}
+                          required
                         />
                       </div>
                     </div>
@@ -178,11 +184,12 @@ const CreateEvent = ({ history }) => {
                       <div className="control">
                         <input
                           className="input is-medium"
-                          type="text"
+                          type="number"
                           placeholder="Attendees"
                           value={formData.expected_attendees}
                           onChange={handleChange}
                           name={'expected_attendees'}
+                          required
                         />
                       </div>
                     </div>
@@ -192,15 +199,7 @@ const CreateEvent = ({ history }) => {
                         <button className="button is-block is-danger is-fullwidth is-medium" onClick={handleUpload}>Upload a photo!</button>
                       </div>
                     </div>
-
-
-
-
-
                     <button onSubmit={handleSubmit} className="button is-block is-white is-medium is-inverted is-fullwidth">Submit</button>
-
-
-
                     <br />
                   </form>
                 </div>

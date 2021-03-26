@@ -90,6 +90,7 @@ const Register = ({ history }) => {
                           value={formData.fullname}
                           onChange={handleChange}
                           name={'fullname'}
+                          required
                         />
                       </div>
                     </div>
@@ -103,6 +104,7 @@ const Register = ({ history }) => {
                           value={formData.username}
                           onChange={handleChange}
                           name={'username'}
+                          required
                         />
                       </div>
                     </div>
@@ -116,6 +118,7 @@ const Register = ({ history }) => {
                           value={formData.email}
                           onChange={handleChange}
                           name={'email'}
+                          required
                         />
                       </div>
                     </div>
@@ -129,6 +132,7 @@ const Register = ({ history }) => {
                           value={formData.password}
                           onChange={handleChange}
                           name={'password'}
+                          required
                         />
                       </div>
                     </div>
@@ -143,6 +147,7 @@ const Register = ({ history }) => {
                           value={formData.headline}
                           onChange={handleChange}
                           name={'headline'}
+                          required
                         />
                       </div>
                     </div>
@@ -152,17 +157,9 @@ const Register = ({ history }) => {
                         <button className="button is-block is-danger is-fullwidth is-medium" onClick={handleUpload}>Add a profile picture.</button>
                       </div>
                     </div>
-
-
-
-
-
                     <button onSubmit={handleSubmit} className="button is-white is-medium is-fullwidth is-inverted">Submit</button>
-
-
                     <small className="level-item" style={{ color: 'var(--textLight)' }}>
-                    © Super Cool Website. All Rights Reserved.</small>
-
+                    © huddle. All Rights Reserved.</small>
                   </form>
                 </div>
               </div>

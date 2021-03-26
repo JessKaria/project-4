@@ -9,7 +9,6 @@ import Footer from './components/Footer/Footer'
 import Dashboard from './components/Dashboard/Dashboard'
 import CreateEvent from './components/CreateEvent/CreateEvent'
 import Message from './components/Message/Message'
-import axios from 'axios'
 
 
 

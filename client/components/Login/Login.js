@@ -1,40 +1,37 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { Link, withRouter } from 'react-router-dom'
-import { Alert } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 const Login = ({ history }) => {
 
-  const [formData, updateFormData] = useState({
-    email: '',
-    password: ''
-  })
+  const { register, handleSubmit, errors } = useForm()
+  const [error, updateError] = useState('')
 
 
-  function handleChange(event) {
-    const name = event.target.name
-    const value = event.target.value
+  async function onSubmit(data) {
+    const formData = {
+      'email': data.email,
+      'password': data.password
+      
+    }
 
-    updateFormData({
-      ...formData,
-      [name]: value
-    })
-  }
 
-  async function handleSubmit(event) {
-    event.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
-      if (localStorage) {
+      if (localStorage && data.token) {
         localStorage.setItem('token', data.token)
+        history.push('/dashboard')
+      } else {
+        updateError('Invalid credentials')
       }
-      history.push('/dashboard')
     } catch (err) {
-      console.log(err.response.data.message)
-      alert(err.response.data.message)
+      updateError('Invalid credentials')
     }
+    
   }
 
+  
 
   return <>
     <section className="hero is-fullheight">
@@ -42,19 +39,18 @@ const Login = ({ history }) => {
         <main className="column">
           <div className="column is-flex is-flex-direction-column is-align-items-center">
             <h1 className="title is-1 ">huddle.</h1>
-            <form className='field' onSubmit={handleSubmit} >
+            <form className='field' onSubmit={handleSubmit(onSubmit)} >
 
               <div className="field">
                 <div className="control">
                   <input
                     className="input is-medium"
                     placeholder="hello@example.com"
-                    autoComplete="username" required
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    name={'email'}
+                    name='email'
+                    ref={register({ required: 'Email is required' })}
                   />
+                  {errors.email && <p>{errors.email.message}</p>}
                 </div>
               </div>
 
@@ -64,24 +60,27 @@ const Login = ({ history }) => {
                     className="input is-medium"
                     placeholder="**********"
                     type="password"
-                    autoComplete="current-password" required
-                    value={formData.password}
-                    onChange={handleChange}
-                    name={'password'}
+                    name='password'
+                    ref={register({ required: 'Password is required', minLength: { value: 4, message: 'Password too short!' } })}
                   />
+                  {errors.password && <p>{errors.password.message}</p>}
                 </div>
+                
+                
               </div>
-              <br />
+              {error && <div className='notification is-black'>{error}</div>}
               <button className="button is-block is-fullwidth is-medium is-white is-medium is-inverted" type="submit">Login</button>
             </form>
             <br />
             <nav className="level">
+            
               <div className="level-item has-text-centered">
                 <div>
-                  <Link to="/register" className="text">Create an account</Link>
+
                 </div>
               </div>
               <div className="level-item has-text-centered">
+                <Link to="/register" >Create an account.</Link>
                 <div>
                 </div>
               </div>
@@ -90,9 +89,9 @@ const Login = ({ history }) => {
         </main>
       </div>
     </section>
-
   </>
 
 
+
 }
-export default withRouter(Login)
+export default Login
