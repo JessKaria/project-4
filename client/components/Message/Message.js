@@ -5,6 +5,7 @@ import { getLoggedInUserId } from '../lib/auth'
 import { isCreator } from '../lib/auth'
 
 
+
 const Message = ({ match, history }) => {
   //does convo exist - if length is greater?
   const [profile, updateProfile] = useState([])
@@ -261,6 +262,7 @@ const Message = ({ match, history }) => {
   //! yes there is previous history - return all messages in that conversation
 
   return <>
+  
 
     <section className="hero is-black">
       <div className="hero-body">
@@ -335,7 +337,7 @@ const Message = ({ match, history }) => {
                             </div>
                           </article>
 
-                          
+                         
                           <button onClick={getMessages} className="button is-white is-medium is-inverted">Check messages.</button>
                         </div>
                       </div>
