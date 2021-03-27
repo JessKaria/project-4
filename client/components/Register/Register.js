@@ -58,7 +58,7 @@ const Register = ({ history }) => {
       console.log(data)
     } catch (err) {
       console.log(err.response.data)
-      alert(err.response.data)
+      alert('That username has already been taken')
     }
   }
 
