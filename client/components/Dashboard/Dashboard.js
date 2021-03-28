@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
 import { getLoggedInUserId } from '../lib/auth'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 
 

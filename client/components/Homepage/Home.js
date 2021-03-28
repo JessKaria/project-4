@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-
-
 import axios from 'axios'
 
 
+
 const Home = ({ history }) => (
+  
 
   <>
     <section className="hero is-medium">

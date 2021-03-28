@@ -78,7 +78,7 @@ To get a clear understanding of how my models would interact, I used an Entity R
 
 The entire crux of my application was centered around users being able to private message other users in relation to an event they created. Without it, I don't think the users would be able to get any real value from it. This was an essential feature and one that I persevered with to create.
 
-Firstly I did some some research on how to best structure tables so that the users messages would be private and would not exist all in one table. I cam across a few relationship diagrams where the use of a conversation table which containted two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things become a lot clearer.
+Firstly I did some some research on how to best structure tables so that the users messages would be private and would not exist all in one table. I came across a few relationship diagrams where the use of a conversation table which containted two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things become a lot clearer.
 
 The first challenge was to create models that contained the correct foreign keys that they were refrencing, I knew that a join table wouldn't suffice so I worked out how to have two userID's on the conversation table which was a huge win and allowed me to start writing controllers and testing.
 
@@ -316,13 +316,72 @@ def test_send_message():
 
 ## Front-End
 
+As I moved on to the front-end, my first focus was building out registration, login and create event forms, then I wanted to focus my attention to building out messaging.
+
 ![here](https://github.com/JessKaria/project-4/blob/main/image/2.png?raw=true)
 
-## Challenges
+
+## Registration
+I made all the fields on the registration required except the image upload, so that I could capture the most information and also ensure the data delivered to the back-end was that of a complete profile.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/4.png?raw=true)
+
+I gave the image upload a default value which would populate the user profile with a default avatar image.
+
+```
+  const [formData, updateFormData] = useState({
+    fullname: '',
+    username: '',
+    email: '',
+    password: '',
+    headline: '',
+    photo: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'
+  })
+
+```
+![here](https://github.com/JessKaria/project-4/blob/main/image/2.png?raw=true)
+
+## Login
+For login, I wanted to have some more robust error handling so I opted to use React Hook Forms, if I had more time I think I would have liked to implement this across all the forms on the app.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/6.png?raw=true)
+
+The form had validation on the length of the password as well as requiring a valid email address. In addition, for any in correct details I was able to render an 'Invalid Credentials' warning error.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/8.png?raw=true)
+
+## Dashboard
+After logging in the user lands on a dashboard which renders information on how many events are on the platform amongst other things.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/9.png?raw=true)
 
 
+## Messaging
 
-## What I learned?
+On the dashboard, I am executing an axios fetch request then mapping over over the events. A user can then click through to an event detail page where they can initiate a chat or create a chat with the user that created that event.
+
+When the page loads, I am running several fetch requests to render the data for that event on the page, but also checking the conversation table to see if a 'chat' between the two users.
+
+## Conversation already exists...
+
+If the conversation exists, I used a ternary to display a button where users can submit a request to retrive chat history with that user, it will also show a form where a user can send subject and message to that user.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/10.png?raw=true)
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/11.png?raw=true)
+
+## Conversation does not exist...
+
+If the conversation does not exist, the ternary will render a slightly different page, showing users a button to create a conversation, once clicked it will create a conversation and reload the page thus rendering the above page.
+
+And all functionality exists the same, a user can then message the owner of the event through the form and also then retrieve messages in the same manner.
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/12.png?raw=true)
+
+![here](https://github.com/JessKaria/project-4/blob/main/image/13.png?raw=true)
+
+
+## Messaging continued.
 
 
 
