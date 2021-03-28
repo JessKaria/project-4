@@ -150,7 +150,7 @@ class Message(db.Model, BaseModel):
 
 ```
 ## Other models 😢
-I set out witht he best intentions of creating comments, and the ability for users to add category types to their events, all the controllers and functionality were built. However due to time contraints I had to drop them when I reached the front-end in the pursuit of delivering a strong messaging experience.
+I set out with the best intentions of creating comments, and the ability for users to add category types to their events, all the controllers and functionality were built. However due to time contraints I had to drop them when I reached the front-end in the pursuit of delivering a strong messaging experience.
 
 
 ## Messaging Framework
