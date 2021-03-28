@@ -383,9 +383,24 @@ And all functionality exists the same, a user can then message the owner of the 
 
 ## Messaging continued.
 
+As mentioned delivering a strong, secure and private messaging experience was key to the app and I am happy with how it was delivered. In hindsight I wish I was able to add in followers and following and also refactor all the code fromt the messaging component into smaller seperate reusable components, however time just wasnt on my side.
+
+## Challenges and learnings
+
+Hands down, understanding the models and how messaging woud work both on the front and back-end was the biggest challenge. One half is proud of what I achieved and the other just wanted to build more features and refactor the code in the messaging component.
+
+The second challenge was working solo. I learnt so much but at times it would have been nice to celebrate small wins with a partner or bounce ideas off.
 
 
-## Future features
+## Future Features
+
+* React Hook Forms across app
+* Refactor code in messaging component
+* Add follower and following join table 
+* Better validation on the front end
+* The events don't have location on
+* Write some more tests
+* Spend more time on styling
 
 
 
