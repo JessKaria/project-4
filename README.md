@@ -226,7 +226,7 @@ def get_sent_messages():
 
 ## Controllers
 
-I spent around half a day testing my routes in Insomnia, I asked myself the below questions and ensured that the data was being populated correctly and that I could retrieve chat history and the users that sent those messages as well as being able to successfully create a conversation and send new messages.
+I spent around half a day testing my routes in Insomnia, I asked myself the below questions and ensured that the data was being populated correctly and that I could retrieve chat history. I also ensured that the users that sent those messages could read their own chat history as well as being able to successfully create a conversation and send new messages to new users.
 
 * Sending a blank response do I get a response?
 * Do I get the correct response?
@@ -318,7 +318,7 @@ def test_send_message():
 
 As I moved on to the front-end, my first focus was building out registration, login and create event forms, then I wanted to focus my attention to building out messaging.
 
-![here](https://github.com/JessKaria/project-4/blob/main/image/2.png?raw=true)
+![here](https://github.com/JessKaria/project-4/blob/main/image/huddleScreen.png?raw=true)
 
 
 ## Registration
