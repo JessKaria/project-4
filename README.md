@@ -1,3 +1,6 @@
+# README
+
+
 ### ![GA](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png) General Assembly, SEI 
 
 
@@ -5,7 +8,7 @@
 
 
 ## Overview
-For the final project at General Assembly, we were asked to build a full-stack web application by building our own front and back-end, I chose to go solo, as I wanted to challenge myself to write every line of code, and intern hopefully deepen my understanding of the new technologies and languages we had learnt.
+For final project at General Assembly, we were asked to build a full-stack web application by building our own front and back-end, I chose to go solo, as I wanted to challenge myself to write every line of code, and intern hopefully deepen my understanding of the new technologies and languages we had learnt.
 
 ## Brief 🐍 👨🏾‍💻
 
@@ -63,7 +66,7 @@ Leaning on my previous experience in marketing, and love for live events I decid
 
 ![here](https://github.com/JessKaria/project-4/blob/main/image/Add%20a%20heading%20(1).png?raw=true)
 
-Working solo was at first quite intimidating, and my plans were quite ambitious for the timeframe we had, however I spent the first day planning out my time, setting achievable milestones and gave myself accountability to ensure the project would be delivered on time.
+Working solo was at first quite intimidating, and my plans were quite ambitious for the timeframe we had, however I spent the first day planning out my time, setting achiveable milestones and gave myself accountability to ensure the project would be delivered on time.
 
 * Back-end - Day 2, 3, 4
 * Front-end - Day 4, 5, 6, 7
@@ -73,23 +76,19 @@ Working solo was at first quite intimidating, and my plans were quite ambitious 
 
 ![here](https://raw.githubusercontent.com/JessKaria/project-4/main/image/Screenshot%202021-03-26%20at%2022.49.22.png)
 
-To get a clear understanding of how my models would interact, I used an Entity Relationship Diagram which helped visualise the relationships as well as helping me understand of fields my tables would contain.
+To get a clear understanding of how my models would interact, I used an Entity Relationship Diagram which helped visualise the relationships aswell helping me understand of fields my tables would contain.
 
 ## Creating messaging relationships 📲
 
 The entire crux of my application was centered around users being able to private message other users in relation to an event they created. Without it, I don't think the users would be able to get any real value from it. This was an essential feature and one that I persevered with to create.
 
-<<<<<<< HEAD
 Firstly I did some some research on how to best structure tables so that the users messages would be private and would not exist all in one table. I came across a few relationship diagrams where the use of a conversation table which containted two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things became a lot clearer.
-=======
-Firstly, I did some research on how to best structure tables so that the users' messages would be private and would not exist all in one table. I came across a few relationship diagrams where the use of a conversation table which contained two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things became a lot clearer.
->>>>>>> 1cec25738fb2d9ac2f72c111bf8e83f22eaebfb7
 
-The first challenge was to create models that contained the correct foreign keys that they were referencing, I knew that a join table wouldn't suffice, so I worked out how to have two user IDs on the conversation table which was a huge win and allowed me to start writing controllers and testing.
+The first challenge was to create models that contained the correct foreign keys that they were refrencing, I knew that a join table wouldn't suffice so I worked out how to have two userID's on the conversation table which was a huge win and allowed me to start writing controllers and testing.
 
 ## User Model 🤷🏿‍♂️
 
-The user model contained all the information we would collect at the form input. Here I specified the datatypes and also the relationships to other tables. Users have a relationship with the Conversation table with an explicit reference to the foreign keys.
+The user model contained all the information we would collect at the form input. Here I specified the datatypes and also the relationships to other tables. Users have a relationship with the Conversation table with an explicit refrence to the foreign keys.
 
 ```
 class User(db.Model, BaseModel):
@@ -107,7 +106,7 @@ class User(db.Model, BaseModel):
     comments = db.relationship('Comment', backref='user', cascade="all, delete")
     messages = db.relationship('Message', backref='user', cascade='all, delete')
     
-    #? two sides of the conversation have their IDs stored in the conversation table
+    #? two sides of the conversation have their ID's stored in the conversation table
 
     userone = db.relationship('Conversation', backref='userone', foreign_keys = 'Conversation.userone_id') 
     usertwo = db.relationship('Conversation', backref='usertwo', foreign_keys = 'Conversation.usertwo_id') 
@@ -115,7 +114,7 @@ class User(db.Model, BaseModel):
 ```
 ## Conversation Model 🙍🏿‍♂️ 🙍🏾
 
-The conversation model is slightly shorter as it is not user facing and only populated to organise users messages into private conversations. When a user goes to message another user it would put both ID's into this table and the conversation ID would mark a private conversation with the user who initiated the conversation and the user who created the event.
+The conversation model, is slightly shorter as it is not user facing and only populated to organise users messages into private conversations. When a user goes to message another user it would put both ID's into this table and the conversation ID would mark a private conversation with the user who initiated the conversation and the user who created the event.
 
 ```
 class Conversation(db.Model, BaseModel):
@@ -135,7 +134,7 @@ class Conversation(db.Model, BaseModel):
 ```
 ## Messages Model 💬
 
-The messaging model is the final piece in this three-way puzzle and one that is super easy to understand, it contains the inputs of the message and houses the FK of a user and the conversation that the user has sent that particular message in. Now, if you want to retrieve private messages between yourself and a user you can look up the conversation ID in this table, there will only ever be two users in one conversation. 
+The messaging model is the final piece in this three way puzzle and one that is super easy to understand, it contains the inputs of the message and houses the FK of a user and the conversation that the user has sent that particular message in. Now, if you wanted to retrieve private messages between yourself and a user you can just just look up the conversation ID in this table, there will only every be two users in one coversation. 
 
 ```
 class Message(db.Model, BaseModel):
@@ -155,7 +154,7 @@ class Message(db.Model, BaseModel):
 
 ```
 ## Other models 😢
-I set out with the best intentions of creating comments, and the ability for users to add category types to their events, all the controllers and functionality were built. However due to time constraints I had to drop them when I reached the front-end in the pursuit of delivering a strong messaging experience.
+I set out witht he best intentions of creating comments, and the ability for users to add category types to their events, all the controllers and functionality were built. However due to time contraints I had to drop them when I reached the front-end in the pursuit of delivering a strong messaging experience.
 
 
 ## Messaging Framework
@@ -231,9 +230,9 @@ def get_sent_messages():
 
 ## Controllers continued
 
-I spent around half a day testing my routes in Insomnia, I asked myself the below questions and ensured that the data was being populated correctly and that I could retrieve chat history. I also ensured that the users who sent those messages could read their own chat history as well as being able to successfully create a conversation and send new messages to new users.
+I spent around half a day testing my routes in Insomnia, I asked myself the below questions and ensured that the data was being populated correctly and that I could retrieve chat history and the users that sent those messages as well as being able to successfully create a conversation and send new messages.
 
-* Sending a blank response, do I get a response?
+* Sending a blank response do I get a response?
 * Do I get the correct response?
 * Do I get the correct data and only what information I need?
 * Can I access the data without authentication?
@@ -242,7 +241,7 @@ I spent around half a day testing my routes in Insomnia, I asked myself the belo
 * Do I get the correct response when sending the wrong JSON data?
 * Do I get the correct data when authentication and JSON are correct?
 
-Once I was happy with the outputs I looked at setting up a testing environment to test those routes and the messaging journey end to end.
+Once I was happy with the outputs I looked at setting up a testing enviroment to test those routes and the messaging journey end to end.
 
 ```
 #! Login and get message from user 2
@@ -323,7 +322,7 @@ def test_send_message():
 
 As I moved on to the front-end, my first focus was building out registration, login and create event forms, then I wanted to focus my attention to building out messaging.
 
-![here](https://github.com/JessKaria/project-4/blob/main/image/huddleScreen.png?raw=true)
+![here](https://github.com/JessKaria/project-4/blob/main/image/2.png?raw=true)
 
 
 ## Registration
@@ -347,29 +346,29 @@ I gave the image upload a default value which would populate the user profile wi
 ![here](https://github.com/JessKaria/project-4/blob/main/image/2.png?raw=true)
 
 ## Login
-For the login, I wanted to have some more robust error handling, so I opted to use React Hook Forms, if I had more time I think I would have liked to implement this across all the forms on the app.
+For login, I wanted to have some more robust error handling so I opted to use React Hook Forms, if I had more time I think I would have liked to implement this across all the forms on the app.
 
 ![here](https://github.com/JessKaria/project-4/blob/main/image/6.png?raw=true)
 
-The form had validation on the length of the password as well as requiring a valid email address. In addition, for any incorrect details I was able to render an 'Invalid Credentials' warning error.
+The form had validation on the length of the password as well as requiring a valid email address. In addition, for any in correct details I was able to render an 'Invalid Credentials' warning error.
 
 ![here](https://github.com/JessKaria/project-4/blob/main/image/8.png?raw=true)
 
 ## Dashboard
-After logging in the user lands on a dashboard which renders information on how many events are on the platform among other things.
+After logging in the user lands on a dashboard which renders information on how many events are on the platform amongst other things.
 
 ![here](https://github.com/JessKaria/project-4/blob/main/image/9.png?raw=true)
 
 
 ## Messaging
 
-On the dashboard, I am executing an Axios fetch request then mapping over the events. A user can then click through to an event detail page where they can initiate a chat or create a chat with the user that created that event.
+On the dashboard, I am executing an axios fetch request then mapping over over the events. A user can then click through to an event detail page where they can initiate a chat or create a chat with the user that created that event.
 
-When the page loads, I am running several fetch requests to render the data for that event on the page, but also checking the conversation table to see if a 'chat' between the two users exists.
+When the page loads, I am running several fetch requests to render the data for that event on the page, but also checking the conversation table to see if a 'chat' between the two users.
 
 ## Conversation already exists...
 
-If the conversation exists, I used a ternary to display a button where users can submit a request to retrieve chat history with that user, it will also show a form where a user can send a subject and message to that user.
+If the conversation exists, I used a ternary to display a button where users can submit a request to retrive chat history with that user, it will also show a form where a user can send subject and message to that user.
 
 ![here](https://github.com/JessKaria/project-4/blob/main/image/10.png?raw=true)
 
@@ -388,7 +387,7 @@ And all functionality exists the same, a user can then message the owner of the 
 
 ## Messaging continued.
 
-As mentioned delivering a strong, secure and private messaging experience was key to the app and I am happy with how it was delivered. In hindsight, I wish I could add in followers and following and also refactor all the code from the messaging component into smaller separate reusable components, however time just wasn't on my side.
+As mentioned delivering a strong, secure and private messaging experience was key to the app and I am happy with how it was delivered. In hindsight I wish I was able to add in followers and following and also refactor all the code fromt the messaging component into smaller seperate reusable components, however time just wasnt on my side.
 
 ## Challenges
 
@@ -400,17 +399,13 @@ As mentioned delivering a strong, secure and private messaging experience was ke
 
 ## Lessons learned
 
-Hands down this was one of favourite projects to date, it gave me a chance to practice writing Python, which we had only learned in the last two weeks - it was a hugely fulfilling experience as I was able to see the similarities and differences to JavaScript. I felt as the week went on, I became much more comfortable.
+Hands down this was one of favourite projects to date, it gave me a chance to practice writing Python, which we had only learned in the last two weeks - it was a hugely fulfilling experience as I was able to see the similarities and differences to JavaScript. I felt as the week went on, I became much more comfortable writing Python.
 
-At the beginning of the project, I has never built anything to this scale working solo and it was extremely intimidating. Not only that I would be coding in a brand new language as well as using new technologies. Without a team to troubleshoot issues with, I leaned heavily on documentation and breaking down bugs until I was able to crack them. Not only did this sharpen my debugging skills, but I feel much more comfortable reading technical documentation.
+At the beginning of the project, I has never built anything to this scale working solo and it was extremely intimidating. Not only that, I would be coding in a brand new language as well as using new technologies. Without a team to troubleshoot issues with, I leaned heavily on documentation and breaking down bugs until I was able to crack them. Not only did this sharpen my debugging skills, but I feel much more comfortable reading technical documentation.
 
 If I had the chance to go back, I think I would cut comments and have implemented a 'friends' model where users can follow and be followed by other users. I think I underestimated how long things would take and how complex private messaging would prove to be.
 
-<<<<<<< HEAD
 Leveraging a CSS framework, in previous projects I have struggled getting Bulma replicate my vision, but in this project I used the framework for basic scaffolidng and felt much more comfortable here.
-=======
-Hands down, understanding the models and how messaging would work both on the front and back-end was the biggest challenge. One half is proud of what I achieved and the other just wanted to build more features and refactor the code in the messaging component.
->>>>>>> 1cec25738fb2d9ac2f72c111bf8e83f22eaebfb7
 
 The last lesson would be to build in some time for refactoring code, I think generally most of the application is well structured but there a few components that could definatley use some work.
 
@@ -424,11 +419,8 @@ The last lesson would be to build in some time for refactoring code, I think gen
 * The events don't have location on
 * Write some more tests
 * Spend more time on styling
-<<<<<<< HEAD
 * Kickback email when someone signs up
 
 
 
 
-=======
->>>>>>> 1cec25738fb2d9ac2f72c111bf8e83f22eaebfb7
