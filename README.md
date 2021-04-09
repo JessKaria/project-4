@@ -21,6 +21,11 @@ For final project at General Assembly, we were asked to build a full-stack web a
 
 You can view my App deployed here on Heroku [here](https://huddle-sei.herokuapp.com/), or find the GitHub repo [here](https://github.com/JessKaria/project-4).
 
+To explore the app you can login with the below details:
+
+* **Email:** jess@jess.com
+* **Password:** jess
+
 
 ## Introducing, Huddle! 🍷🕺🏿
 
@@ -37,16 +42,16 @@ Leaning on my previous experience in marketing, and love for live events I decid
 * PostgreSQL
 * Bcrypt
 * Pytest
-* HTML5
 * SCSS
-* JavaScript
+* JavaScript (ES6)
 * React.js
 * Axios
 * React Router DOM
-* React Hook Form
+* React Hook Forms
 * VS code
 * Pipenv
-* Npm
+* NPM
+* Supertest
 * Insomnia
 * Git
 * Github
@@ -56,7 +61,6 @@ Leaning on my previous experience in marketing, and love for live events I decid
 * Babel
 * JSX
 * SASS
-
 
 ## Planning 📚
 
@@ -78,7 +82,7 @@ To get a clear understanding of how my models would interact, I used an Entity R
 
 The entire crux of my application was centered around users being able to private message other users in relation to an event they created. Without it, I don't think the users would be able to get any real value from it. This was an essential feature and one that I persevered with to create.
 
-Firstly I did some some research on how to best structure tables so that the users messages would be private and would not exist all in one table. I came across a few relationship diagrams where the use of a conversation table which containted two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things become a lot clearer.
+Firstly I did some some research on how to best structure tables so that the users messages would be private and would not exist all in one table. I came across a few relationship diagrams where the use of a conversation table which containted two user ID's could be used to then group messages. It took me a while to get my head around, but once I wrote out my models and started testing requests in Insomnia, things became a lot clearer.
 
 The first challenge was to create models that contained the correct foreign keys that they were refrencing, I knew that a join table wouldn't suffice so I worked out how to have two userID's on the conversation table which was a huge win and allowed me to start writing controllers and testing.
 
@@ -224,7 +228,7 @@ def get_sent_messages():
 ```
 
 
-## Controllers
+## Controllers continued
 
 I spent around half a day testing my routes in Insomnia, I asked myself the below questions and ensured that the data was being populated correctly and that I could retrieve chat history and the users that sent those messages as well as being able to successfully create a conversation and send new messages.
 
@@ -385,11 +389,25 @@ And all functionality exists the same, a user can then message the owner of the 
 
 As mentioned delivering a strong, secure and private messaging experience was key to the app and I am happy with how it was delivered. In hindsight I wish I was able to add in followers and following and also refactor all the code fromt the messaging component into smaller seperate reusable components, however time just wasnt on my side.
 
-## Challenges and learnings
+## Challenges
 
-Hands down, understanding the models and how messaging woud work both on the front and back-end was the biggest challenge. One half is proud of what I achieved and the other just wanted to build more features and refactor the code in the messaging component.
+* This was my first time building a backend in Python and also using Flask and an SQL database. Without a doubt the biggest challenge was understanding the relationships between my models. I felt comfortable building the relationships between users and events, however once I moved too private messaging, thing became a lot harder to understand - this required visual tools in the form of my ERD but also actually building some test controllers to test how requests behaved in Insomnia.
 
-The second challenge was working solo. I learnt so much but at times it would have been nice to celebrate small wins with a partner or bounce ideas off.
+* Validation and error handling is something else I am looking to spend more time with, on my previous project I felt I had a good understanding of how to validate data before it enters the database, on this particular project, I think I could have done a lot more robust validation on the backend.
+
+* The whole crux of this application was around delivering a private messaging and I wish I had spent more time considering how this would work for a user before coding, whilst I am happy with what I built - I can already think of a hundred things I would like to do differently.
+
+## Lessons learned
+
+Hands down this was one of favourite projects to date, it gave me a chance to practice writing Python, which we had only learned in the last two weeks - it was a hugely fulfilling experience as I was able to see the similarities and differences to JavaScript. I felt as the week went on, I became much more comfortable.
+
+At the beginning of the project, I has never built anything to this scale working solo and it was extremely intimidating. Not only that I would be coding in a brand new language as well as using new technologies. Without a team to troubleshoot issues with, I leaned heavily on documentation and breaking down bugs until I was able to crack them. Not only did this sharpen my debugging skills, but I feel much more comfortable reading technical documentation.
+
+If I had the chance to go back, I think I would cut comments and have implemented a 'friends' model where users can follow and be followed by other users. I think I underestimated how long things would take and how complex private messaging would prove to be.
+
+Leveraging a CSS framework, in previous projects I have struggled getting Bulma replicate my vision, but in this project I used the framework for basic scaffolidng and felt much more comfortable here.
+
+The last lesson would be to build in some time for refactoring code, I think generally most of the application is well structured but there a few components that could definatley use some work.
 
 
 ## Future Features
@@ -401,6 +419,7 @@ The second challenge was working solo. I learnt so much but at times it would ha
 * The events don't have location on
 * Write some more tests
 * Spend more time on styling
+* Kickback email when someone signs up
 
 
 
